@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App bg-slate-800">
       <div className="flex flex-col justify-center items-center mx-10 min-h-screen">
-        <div className="flex text-2xl md:text-5xl text-white mx-10">
+        <div className="flex text-3xl md:text-5xl text-white mx-10">
           <BsCloudRainFill/>
           <h1 className="font-chivo mx-5">5-day Forecast</h1>
           <BsCloudRainFill/>
@@ -22,7 +22,7 @@ function App() {
         {city? 
           <WeatherContainer search={city}/>
           :
-          <p className="text-3xl text-white font-chivo">No City Name Entered..</p>
+          <p className="text-lg md:text-3xl text-white font-chivo">No City Name Entered..</p>
         }
       </div> 
     </div>
