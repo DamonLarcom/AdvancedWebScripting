@@ -7,24 +7,24 @@ import { SyncLoader } from "react-spinners";
 
 const WeatherContainer = ({search}) => {
     const [forecast, setForecast] = useState(mockdata)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [isError, setError] = useState(false)
 
-    // useEffect(() => {
-    //     setError(!isError)
-    //     fetchData()
-    // },[search])
+    useEffect(() => {
+        setError(!isError)
+        fetchData()
+    },[search])
     
-    // const fetchData = async() => {
-    //     await axios.get(`${config.apiUrl}&city=${search}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setForecast(data)
-    //             setLoading(!loading)
-    //         }).catch(() => {
-    //             setError(true)
-    //         })
-    // }
+    const fetchData = async() => {
+        await axios.get(`${config.apiUrl}&city=${search}`)
+            .then(res => res.json())
+            .then(data => {
+                setForecast(data)
+                setLoading(!loading)
+            }).catch(() => {
+                setError(true)
+            })
+    }
 
     return (
         <>
