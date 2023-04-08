@@ -7,22 +7,22 @@ function App() {
   const cityRef = useRef(null)
 
   return (
-    <div className="App">
-      <div className="flex flex-col justify-center items-center min-h-screen bg-slate-800">
-        <div className="flex text-5xl text-white">
+    <div className="App bg-slate-800">
+      <div className="flex flex-col justify-center items-center mx-10 min-h-screen">
+        <div className="flex text-2xl md:text-5xl text-white mx-10">
           <BsCloudRainFill/>
           <h1 className="font-chivo mx-5">5-day Forecast</h1>
           <BsCloudRainFill/>
         </div>
         
         <div id="city" className="flex">
-           <input type="text" className="w-80 h-16 text-2xl rounded-md text-center my-5 mx-2 font-chivo" placeholder="Enter a city.." ref={cityRef}/>
-          <button className="w-36 h-16 text-lg text-white font-chivo rounded-lg shadow-xl bg-slate-400 my-5 mx-2" onClick={() => setCity(cityRef.current.value)}>Update City</button>
+           <input type="text" className="w-56 md:w-80 h-16 text-lg md:text-2xl rounded-md text-center my-5 mx-2 font-chivo" placeholder="Enter a city.." ref={cityRef}/>
+          <button className="h-16 text-sm md:text-lg text-white font-chivo rounded-lg shadow-xl bg-slate-400 my-5 mx-2 p-5" onClick={() => setCity(cityRef.current.value)}>Go!</button>
         </div>
         {city? 
           <WeatherContainer search={city}/>
           :
-          <p className="text-3xl text-white">No City Selected..</p>
+          <p className="text-3xl text-white font-chivo">No City Name Entered..</p>
         }
       </div> 
     </div>
