@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import WeatherTile from "./WeatherTile"
 import config from '../resources/config.json'
 import mockdata from "../resources/mockdata.json"
-import axios from "axios";
 import { SyncLoader } from "react-spinners";
 import {FaFrown} from 'react-icons/fa'
 
@@ -22,13 +21,13 @@ const WeatherContainer = ({search}) => {
     },[search])
     
     const fetchData = async() => {
-        await axios.get(`${config.apiUrl}&city=${search}`)
+        await fetch(`${config.apiUrl}&city=${search}`)
             .then(res => res.json())
             .then(data => {
                 setForecast(data)
                 setLoading(!loading)
-            }).catch(() => {
-                console.log('caught exception')
+            }).catch((e) => {
+                console.log('caught exception:' + e)
             })
     }
 

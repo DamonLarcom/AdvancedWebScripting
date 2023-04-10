@@ -15,11 +15,17 @@ function App() {
           <BsCloudRainFill/>
         </div>
         
-        <div id="city" className="flex">
-           <input type="text" className="w-56 md:w-80 h-16 text-lg md:text-2xl rounded-md text-center my-5 mx-2 font-chivo" placeholder="Enter a city.." ref={cityRef}/>
-          <button className="h-16 text-sm md:text-lg text-white font-chivo rounded-lg shadow-xl bg-slate-400 my-5 mx-2 p-5" onClick={() => setCity(cityRef.current.value)}>Go!</button>
+        <div className="flex">
+          <input type="text" className="w-56 md:w-80 h-16 text-lg md:text-2xl rounded-md text-center my-5 mx-2 font-chivo" placeholder="Enter a city.." ref={cityRef}/>
+          <button className="h-16 text-sm md:text-lg text-white font-chivo rounded-lg shadow-xl bg-slate-400 my-5 mx-2 p-5" 
+            onClick={() => {
+                console.log("State: " + city)
+                console.log("Ref: " + cityRef.current.value)
+                setCity(cityRef.current.value)
+              }
+            }>Go!</button>
         </div>
-        {city? 
+        {city && city != ''? 
           <WeatherContainer search={city}/>
           :
           <p className="text-lg md:text-3xl text-white font-chivo">No City Name Entered..</p>
