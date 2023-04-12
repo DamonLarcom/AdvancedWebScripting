@@ -3,7 +3,6 @@ import WeatherTile from "./WeatherTile"
 import config from '../resources/config.json'
 import mockdata from "../resources/mockdata.json"
 import { SyncLoader } from "react-spinners";
-import {FaFrown} from 'react-icons/fa'
 
 const WeatherContainer = ({search}) => {
     const [forecast, setForecast] = useState(mockdata)
@@ -16,19 +15,21 @@ const WeatherContainer = ({search}) => {
             if(loading){
                 setError(true)
             }
-        },15000)
+        },7000)
         fetchData()
     },[search])
     
     const fetchData = async() => {
+        if(search !== '' && search !== null){
         await fetch(`${config.apiUrl}&city=${search}`)
             .then(res => res.json())
             .then(data => {
                 setForecast(data)
-                setLoading(!loading)
+                setLoading(false)
             }).catch((e) => {
                 console.log('caught exception:' + e)
             })
+        }
     }
 
     return (
@@ -37,7 +38,7 @@ const WeatherContainer = ({search}) => {
                 <>
                     <p className="text-lg md:text-3xl text-white font-chivo"><SyncLoader color="#FFF"/></p>
                     {/* Flex on this p tag is to put the frowny face inline with the text */}
-                    {isError? <p className="text-md md:text-3xl text-white font-chivo flex mt-5">If it's still loading, I am at my daily request limit <FaFrown/></p> : null}
+                    {isError? <p className="text-md md:text-3xl text-red-500 font-chivo flex mt-5">An error occurred while searching for this city.</p> : null}
                 </>
                 :
                 <div className="text-center">
