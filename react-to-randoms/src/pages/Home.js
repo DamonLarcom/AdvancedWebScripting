@@ -19,7 +19,10 @@ const Home = () => {
     useEffect(() =>{
         fetch(url)
         .then(res => res.json())
-        .then(data => setUsers(data.results))
+        .then(data => {
+            setUsers(data.results)
+            setFiltered(data.results)
+        })
     }, [])
 
     useEffect(() => {
@@ -51,7 +54,9 @@ const Home = () => {
                 <input type="number" placeholder='Age Max' className='shadow-xl rounded-lg p-2 border-2 w-32' onChange={(e) => setAgeMax(e.target.value)}/>
             </div>
         </div>
-        <p className='text-2xl font-bold my-5'>Results: {filtered.length}</p>
+        {
+            filtered.length > 0? <p className='text-2xl font-bold my-5'>Results: {filtered.length}</p> : null
+        }
         <div className='flex flex-wrap gap-5 justify-center '>
             {filtered.map((user, index) => {
                 return (
