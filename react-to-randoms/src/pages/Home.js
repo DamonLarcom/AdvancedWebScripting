@@ -54,9 +54,7 @@ const Home = () => {
                 <input type="number" placeholder='Age Max' className='shadow-xl rounded-lg p-2 border-2 w-32' onChange={(e) => setAgeMax(e.target.value)}/>
             </div>
         </div>
-        {
-            filtered.length > 0? <p className='text-2xl font-bold my-5'>Results: {filtered.length}</p> : null
-        }
+        <p className='text-2xl font-bold my-5'>Results: {filtered.length}</p>
         <div className='flex flex-wrap gap-5 justify-center '>
             {filtered.map((user, index) => {
                 return (
