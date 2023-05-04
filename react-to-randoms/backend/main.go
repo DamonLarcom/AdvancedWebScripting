@@ -17,7 +17,7 @@ func main() {
 		AllowedMethods: []string{"GET", "OPTIONS"},
 	}))
 
-	r.Get("/api/v1", handlers.GetPeople)
+	r.Get("/", handlers.GetPeople)
 	r.Handle("/img/*", http.StripPrefix("/img/", http.FileServer(http.Dir("./images"))))
 
 	//Read json and make a globally accessable version of it
