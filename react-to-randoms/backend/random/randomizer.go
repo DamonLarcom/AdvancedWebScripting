@@ -86,7 +86,7 @@ func generateDob() models.Dob {
 	randomDate := startDate.Add(randomDuration)
 
 	return models.Dob{
-		Date: randomDate.String(),
+		Date: randomDate.Format("2006-01-02"),
 		Age:  int(time.Now().Sub(randomDate).Hours() / 24 / 365),
 	}
 }
@@ -100,9 +100,9 @@ func getImages(gender int) models.Picture {
 	url := config["host_url"]
 
 	if gender == 0 {
-		url += fmt.Sprintf("/img/men/m%03d.jpg", rand.Intn(41))
+		url += fmt.Sprintf("/img/men/m%03d.jpg", rand.Intn(40)+1)
 	} else {
-		url += fmt.Sprintf("/img/women/f%03d.jpg", rand.Intn(41))
+		url += fmt.Sprintf("/img/women/f%03d.jpg", rand.Intn(40)+1)
 	}
 
 	//who cares about the size man

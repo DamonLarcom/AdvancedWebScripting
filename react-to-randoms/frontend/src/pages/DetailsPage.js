@@ -9,6 +9,8 @@ const DetailsPage = () => {
   const {location} = person
   const {street} = location
 
+  console.log(person)
+
   return (
     <div className='flex flex-col p-10 text-center'>
       <Link to='/' className='shadow-lg rounded-lg border-2 w-32 mx-auto my-5 p-1'>

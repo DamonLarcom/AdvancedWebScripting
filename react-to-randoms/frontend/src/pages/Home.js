@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import PersonCard from '../components/PersonCard'
+import configJson from '../resources/config.json'
 
 const Home = () => {
     // contains full users list
@@ -14,10 +15,8 @@ const Home = () => {
     const [nameFilter, setNameFilter] = useState('')
     const [usernameFilter, setUsernameFilter] = useState('')
 
-    const url = "https://randomuser.me/api/?results=500"
-
     useEffect(() =>{
-        fetch(url)
+        fetch(configJson.api_url + "?results=500")
         .then(res => res.json())
         .then(data => {
             setUsers(data.results)
