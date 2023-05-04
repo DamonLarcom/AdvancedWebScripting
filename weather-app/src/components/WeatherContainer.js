@@ -5,7 +5,7 @@ import mockdata from "../resources/mockdata.json"
 import { SyncLoader } from "react-spinners";
 
 const WeatherContainer = ({search}) => {
-    const [forecast, setForecast] = useState(mockdata)
+    const [forecast, setForecast] = useState({})
     const [loading, setLoading] = useState(true)
     const [isError, setError] = useState(false)
 

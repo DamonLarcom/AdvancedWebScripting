@@ -102,9 +102,9 @@ func getImages(gender int) models.Picture {
 	url := config["host_url"]
 
 	if gender == 0 {
-		url += fmt.Sprintf("/img/men/m%03d", rand.Intn(41))
+		url += fmt.Sprintf("/img/men/m%03d.jpg", rand.Intn(41))
 	} else {
-		url += fmt.Sprintf("/img/women/f%03d", rand.Intn(41))
+		url += fmt.Sprintf("/img/women/f%03d.jpg", rand.Intn(41))
 	}
 
 	//who cares about the size man
