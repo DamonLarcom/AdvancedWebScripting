@@ -24,12 +24,19 @@ func GetPeople(w http.ResponseWriter, r *http.Request) {
 		amount = 1
 	}
 
-	people, err := json.MarshalIndent(generatePeople(int(amount)), "", "    ")
+	//generate the random people
+	people := generatePeople(int(amount))
+
+	//wrap results in a results struct that replicates the structure of the original api
+	results, err := json.MarshalIndent(models.Result{
+		Amount:  amount,
+		Results: people,
+	}, "", "    ")
 	util.CheckErr(err)
 
 	//write response
 	w.WriteHeader(http.StatusOK)
-	_, err = w.Write(people)
+	_, err = w.Write(results)
 	util.CheckErr(err)
 }
 

@@ -97,8 +97,6 @@ func getImages(gender int) models.Picture {
 	util.CheckErr(err)
 
 	_ = json.Unmarshal(jsonBytes, &config)
-
-	fmt.Println(config["host_url"])
 	url := config["host_url"]
 
 	if gender == 0 {
