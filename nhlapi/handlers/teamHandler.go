@@ -34,6 +34,7 @@ func GetAllTeams(w http.ResponseWriter, r *http.Request) {
 	}
 
 	results, _ := json.MarshalIndent(teams, "", "    ")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(results)
 }
 
@@ -62,6 +63,7 @@ func GetTeamByAbbrev(w http.ResponseWriter, r *http.Request) {
 	util.PrintErr(err)
 
 	teamJson, _ := json.MarshalIndent(team, "", "    ")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(teamJson)
 }
 

@@ -21,7 +21,6 @@ func main() {
 	*/
 	//Returns only team info, no players
 	r.Get("/api/teams", handlers.GetAllTeams)
-
 	//Optional: ?includePlayers=true to include teams players (Active and Injured Reserve)
 	r.Get("/api/teams/{abbrev}", handlers.GetTeamByAbbrev)
 	r.Post("/api/teams", handlers.CreateTeam)
@@ -32,7 +31,8 @@ func main() {
 		PLAYERS ROUTES
 	*/
 	r.Get("/api/players", handlers.GetAllPlayers)
-	r.Get("/api/players/{abbrev}", handlers.GetPlayersByTeam)
+	//?team={abbrev} to specify which team to fetch players for
+	r.Get("/api/players", handlers.GetPlayersByTeam)
 	r.Post("/api/players", handlers.CreatePlayer)
 	r.Put("/api/players/{playerId}", handlers.UpdatePlayer)
 	r.Delete("/api/players/{playerId}", handlers.DeletePlayer)

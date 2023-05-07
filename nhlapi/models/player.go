@@ -3,7 +3,7 @@ package models
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type Player struct {
-	Id         primitive.ObjectID `json:"-" bson:"_id"`
+	Id         primitive.ObjectID `json:"id,omitempty" bson:"_id"`
 	FirstName  string             `json:"first_name" bson:"FirstName"`
 	LastName   string             `json:"last_name" bson:"LastName"`
 	Status     string             `json:"status,omitempty" bson:"Status"`
