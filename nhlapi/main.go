@@ -1,8 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"github.com/damonlarcom/advancedwebscripting/nhlapi/controllers"
 	"github.com/damonlarcom/advancedwebscripting/nhlapi/db"
-	"github.com/damonlarcom/advancedwebscripting/nhlapi/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 	"log"
@@ -20,25 +21,27 @@ func main() {
 		TEAMS ROUTES
 	*/
 	//Returns only team info, no players
-	r.Get("/api/teams", handlers.GetAllTeams)
+	r.Get("/api/teams", controllers.GetAllTeams)
 	//Optional: ?includePlayers=true to include teams players (Active and Injured Reserve)
-	r.Get("/api/teams/{abbrev}", handlers.GetTeamByAbbrev)
-	r.Post("/api/teams", handlers.CreateTeam)
-	r.Put("/api/teams/{abbrev}", handlers.UpdateTeam)
-	r.Delete("/api/teams/{abbrev}", handlers.DeleteTeam)
+	r.Get("/api/teams/{abbrev}", controllers.GetTeamByAbbrev)
+	r.Post("/api/teams", controllers.CreateTeam)
+	r.Put("/api/teams/{abbrev}", controllers.UpdateTeam)
+	r.Delete("/api/teams/{abbrev}", controllers.DeleteTeam)
 
 	/*
 		PLAYERS ROUTES
 	*/
-	r.Get("/api/players", handlers.GetAllPlayers)
+	//Optional: ?last={lastName} to search for players with a last name
+	r.Get("/api/players", controllers.GetAllPlayers)
 	//?team={abbrev} to specify which team to fetch players for
-	r.Get("/api/players/{abbrev}", handlers.GetPlayersByTeam)
-	r.Post("/api/players", handlers.CreatePlayer)
-	r.Put("/api/players/{playerId}", handlers.UpdatePlayer)
-	r.Delete("/api/players/{playerId}", handlers.DeletePlayer)
+	r.Get("/api/players/{abbrev}", controllers.GetPlayersByTeam)
+	r.Post("/api/players", controllers.CreatePlayer)
+	r.Put("/api/players/{playerId}", controllers.UpdatePlayer)
+	r.Delete("/api/players/{playerId}", controllers.DeletePlayer)
 
 	//init mongodb connection
 	db.Connect()
 
+	fmt.Println("Running NHL API...")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

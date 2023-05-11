@@ -1,4 +1,4 @@
-package handlers
+package controllers
 
 import (
 	"context"
@@ -10,6 +10,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"net/http"
 	"time"
 )
@@ -39,13 +42,23 @@ func GetPlayersByTeam(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllPlayers(w http.ResponseWriter, r *http.Request) {
+	var cur *mongo.Cursor
+	var err error
 	var players []models.Player
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	cur, err := db.PlayerCol.Find(ctx, bson.D{})
-	util.CheckErrInternal(err, w)
+	if r.URL.Query().Has("last") {
+		caser := cases.Title(language.English)
+		last := caser.String(r.URL.Query().Get("last"))
+
+		cur, err = db.PlayerCol.Find(ctx, bson.M{"LastName": bson.M{"$regex": last}})
+		util.CheckErrInternal(err, w)
+	} else {
+		cur, err = db.PlayerCol.Find(ctx, bson.D{})
+		util.CheckErrInternal(err, w)
+	}
 
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
@@ -80,8 +93,9 @@ func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
 
 func DeletePlayer(w http.ResponseWriter, r *http.Request) {
 	playerId := chi.URLParam(r, "playerId")
+	id, _ := primitive.ObjectIDFromHex(playerId)
 
-	result, err := db.PlayerCol.DeleteOne(context.TODO(), bson.M{"_id": primitive.ObjectIDFromHex(playerId)})
+	result, err := db.PlayerCol.DeleteOne(context.TODO(), bson.M{"_id": id})
 	util.CheckErrInternal(err, w)
 
 	if result.DeletedCount == 0 {

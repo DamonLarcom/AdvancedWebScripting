@@ -12,7 +12,7 @@ type Player struct {
 	Jersey     int                `json:"jersey_number" bson:"Jersey"`
 	Height     int                `json:"height,omitempty" bson:"Height"`
 	Weight     int                `json:"weight,omitempty" bson:"Weight"`
-	BirthDate  string             `json:"birthdate,omitempty" bson:"BirthDate"`
+	BirthDate  string             `json:"birth_date,omitempty" bson:"BirthDate"`
 	BirthCity  string             `json:"birth_city,omitempty" bson:"BirthCity"`
 	BirthState string             `json:"birth_state,omitempty" bson:"BirthState"`
 }
