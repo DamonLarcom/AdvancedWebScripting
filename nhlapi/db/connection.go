@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const uri string = "mongodb://root:password123@localhost:27017/"
+const uri string = "mongodb+srv://dlarcom:jc6Ndx754cOW2GRk@cluster0.lp44dep.mongodb.net/?authMechanism=SCRAM-SHA-1"
 
 var (
 	MongoConn *mongo.Client

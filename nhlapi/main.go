@@ -32,7 +32,7 @@ func main() {
 	*/
 	r.Get("/api/players", handlers.GetAllPlayers)
 	//?team={abbrev} to specify which team to fetch players for
-	r.Get("/api/players", handlers.GetPlayersByTeam)
+	r.Get("/api/players/{abbrev}", handlers.GetPlayersByTeam)
 	r.Post("/api/players", handlers.CreatePlayer)
 	r.Put("/api/players/{playerId}", handlers.UpdatePlayer)
 	r.Delete("/api/players/{playerId}", handlers.DeletePlayer)
