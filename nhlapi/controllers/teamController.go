@@ -123,6 +123,9 @@ func DeleteTeam(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	_, err = db.PlayerCol.UpdateMany(context.TODO(), bson.D{{"Team", abbrev}}, bson.D{{"$set", bson.D{{"Team", "None"}}}})
+	util.PrintErr(err)
+
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(fmt.Sprintf("Deleted team \"" + abbrev + "\"")))
 }
