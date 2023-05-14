@@ -14,6 +14,7 @@ var (
 	PlayerCol *mongo.Collection
 	TeamCol   *mongo.Collection
 	JoinCol   *mongo.Collection
+	UserCol   *mongo.Collection
 )
 
 func Connect() {
@@ -27,5 +28,6 @@ func Connect() {
 	PlayerCol = db.Collection("players")
 	TeamCol = db.Collection("teams")
 	JoinCol = db.Collection("team_players")
+	UserCol = db.Collection("users")
 
 }
