@@ -25,7 +25,11 @@ func GetPlayersByTeam(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	cur, err := db.PlayerCol.Find(ctx, bson.D{{"Team", abbrev}})
-	util.CheckErrInternal(err, w)
+	if err != nil && err == mongo.ErrNoDocuments {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("No players exist for team \"" + abbrev + "\""))
+		return
+	}
 
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
@@ -88,7 +92,30 @@ func CreatePlayer(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
+	var player models.Player
+	err := json.NewDecoder(r.Body).Decode(&player)
+	util.PrintErr(err)
 
+	fmt.Print(player)
+
+	//get id of player to update
+	playerId := chi.URLParam(r, "playerId")
+	id, _ := primitive.ObjectIDFromHex(playerId)
+
+	filter := bson.D{{"_id", id}}
+	update := bson.D{{"$set", player}}
+
+	result, err := db.PlayerCol.UpdateOne(context.TODO(), filter, update)
+	util.PrintErr(err)
+
+	//response
+	if result.ModifiedCount > 0 {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Updated player with id: " + playerId))
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("No players were updated"))
+	}
 }
 
 func DeletePlayer(w http.ResponseWriter, r *http.Request) {

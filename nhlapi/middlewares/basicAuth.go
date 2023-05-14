@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type BasicAuth func(h http.Handler) http.Handler
+type BasicAuth func(http.Handler) http.Handler
 
 func Basic() BasicAuth {
 	return func(h http.Handler) http.Handler {
