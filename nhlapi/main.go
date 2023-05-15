@@ -26,7 +26,7 @@ func main() {
 	//Optional: ?includePlayers=true to include teams players (Active and Injured Reserve)
 	r.Get("/api/teams/{abbrev}", controllers.GetTeamByAbbrev)
 	r.Group(func(r chi.Router) {
-		r.Use(middlewares.Basic())
+		r.Use(middlewares.Key())
 
 		r.Post("/api/teams", controllers.CreateTeam)
 		r.Put("/api/teams/{abbrev}", controllers.UpdateTeam)
@@ -41,12 +41,18 @@ func main() {
 	//?team={abbrev} to specify which team to fetch players for
 	r.Get("/api/players/{abbrev}", controllers.GetPlayersByTeam)
 	r.Group(func(r chi.Router) {
-		r.Use(middlewares.Basic())
+		r.Use(middlewares.Key())
 
 		r.Post("/api/players", controllers.CreatePlayer)
 		r.Put("/api/players/{playerId}", controllers.UpdatePlayer)
 		r.Delete("/api/players/{playerId}", controllers.DeletePlayer)
 	})
+
+	/*
+		User Routes
+	*/
+	r.Post("/api/user", controllers.CreateUser)
+	r.Put("/api/user", controllers.UpdateUser)
 
 	//init mongodb connection
 	db.Connect()

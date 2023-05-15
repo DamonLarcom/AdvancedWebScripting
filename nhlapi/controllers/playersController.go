@@ -96,8 +96,6 @@ func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&player)
 	util.PrintErr(err)
 
-	fmt.Print(player)
-
 	//get id of player to update
 	playerId := chi.URLParam(r, "playerId")
 	id, _ := primitive.ObjectIDFromHex(playerId)

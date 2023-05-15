@@ -6,4 +6,5 @@ type User struct {
 	Id       primitive.ObjectID `json:"id" bson:"_id"`
 	Username string             `json:"username" bson:"username"`
 	Password string             `json:"password" bson:"password"`
+	Key      string             `json:"key" bson:"key"`
 }
