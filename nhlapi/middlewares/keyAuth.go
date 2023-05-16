@@ -22,7 +22,11 @@ func Key() KeyAuth {
 			}
 
 			//return true if the key exists in the database
-			verifyUser(key)
+			status := verifyUser(key)
+			if status == false {
+				authFailed(w)
+				return
+			}
 
 			h.ServeHTTP(w, r)
 		})
@@ -44,6 +48,5 @@ func verifyUser(key string) bool {
 	if err != nil {
 		return false
 	}
-
-	return false
+	return true
 }
