@@ -76,6 +76,7 @@ func CreateTeam(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 	_, err = db.TeamCol.InsertOne(context.TODO(), team)
+	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte("Created team: " + team.Full))
 }
 

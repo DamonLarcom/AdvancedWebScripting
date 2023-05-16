@@ -16,14 +16,7 @@ func Key() KeyAuth {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			//return 401 if no auth is provided
 			key := r.URL.Query().Get("key")
-			if len(key) < 1 {
-				authFailed(w)
-				return
-			}
-
-			//return true if the key exists in the database
-			status := verifyUser(key)
-			if status == false {
+			if len(key) < 1 || !verifyUser(key) {
 				authFailed(w)
 				return
 			}
