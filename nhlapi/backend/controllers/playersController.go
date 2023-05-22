@@ -50,6 +50,29 @@ func GetPlayersByTeam(w http.ResponseWriter, r *http.Request) {
 	w.Write(results)
 }
 
+func GetPlayersById(w http.ResponseWriter, r *http.Request) {
+	var player models.Player
+	id := chi.URLParam(r, "playerId")
+	playerId, _ := primitive.ObjectIDFromHex(id)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	err := db.PlayerCol.FindOne(ctx, bson.D{{"_id", playerId}}).Decode(&player)
+	util.PrintErr(err)
+
+	if err != nil && err == mongo.ErrNoDocuments {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write(playerNotFound)
+		return
+	}
+	util.PrintErr(err)
+
+	playerJson, _ := json.MarshalIndent(player, "", "    ")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(playerJson)
+}
+
 func GetAllPlayers(w http.ResponseWriter, r *http.Request) {
 	var cur *mongo.Cursor
 	var err error

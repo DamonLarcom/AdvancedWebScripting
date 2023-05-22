@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react'
 import TeamDetails from './components/TeamDetails';
 import Register from './components/Register';
 import CreateTeam from './components/CreateTeam';
+import PlayerDetails from './components/PlayerDetails';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/register" element={<Register/>}/>
           <Route exact path="/teams/:abbrev" element={<TeamDetails/>}/>
           <Route exact path="/teams/create" element={<CreateTeam/>}/>
+          <Route exact path="/players/:id" element={<PlayerDetails/>}/>
           {/* 404 page matches all unspecified paths */}
           <Route path="*" element={<NotFound/>}/>
         </Routes>

@@ -38,8 +38,9 @@ func main() {
 	*/
 	//Optional: ?last={lastName} to search for players with a last name
 	r.Get("/api/players", controllers.GetAllPlayers)
+	r.Get("/api/players/{playerId}", controllers.GetPlayersById)
 	//?team={abbrev} to specify which team to fetch players for
-	r.Get("/api/players/{abbrev}", controllers.GetPlayersByTeam)
+	r.Get("/api/players/byTeam/{abbrev}", controllers.GetPlayersByTeam)
 	r.Group(func(r chi.Router) {
 		r.Use(middlewares.Key())
 

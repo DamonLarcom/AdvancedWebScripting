@@ -30,7 +30,7 @@ const TeamDetails = () => {
             :
                 <div className='flex flex-col gap-5 text-center text-2xl w-full'>
                     <Link to="/" className='text-xl shadow-lg rounded-lg bg-slate-400 p-2 w-40 mx-auto'>Back to home</Link>
-                    <h1 className='text-5xl'>{team.name.full} ({team.name.abbrev})</h1>
+                    <h1 className='text-5xl'>{team.name.full} ({team.name.abbrev.toUpperCase()})</h1>
                     <p>Location: {team.location.city}</p>
                     <p>Arena: {team.location.arena_name}</p>
 
