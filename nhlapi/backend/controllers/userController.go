@@ -29,13 +29,12 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil && err == mongo.ErrNoDocuments {
 		w.WriteHeader(http.StatusNotFound)
 		bytes, _ := json.MarshalIndent(models.Response{Status: 404, Message: "User not found"}, "", "    ")
-
 		w.Write(bytes)
 		return
 	}
 	util.PrintErr(err)
 
-	userBytes, err := json.Marshal(user)
+	userBytes, err := json.Marshal(models.Response{Status: 200, Payload: user})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(userBytes)
