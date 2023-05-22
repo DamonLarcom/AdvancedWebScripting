@@ -17,6 +17,10 @@ import (
 	"time"
 )
 
+var (
+	playerNotFound, _ = json.MarshalIndent(models.Response{Status: 404, Message: "Player not found"}, "", "    ")
+)
+
 func GetPlayersByTeam(w http.ResponseWriter, r *http.Request) {
 	var players []models.Player
 	abbrev := chi.URLParam(r, "abbrev")
@@ -27,7 +31,8 @@ func GetPlayersByTeam(w http.ResponseWriter, r *http.Request) {
 	cur, err := db.PlayerCol.Find(ctx, bson.D{{"Team", abbrev}})
 	if err != nil && err == mongo.ErrNoDocuments {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No players exist for team \"" + abbrev + "\""))
+		bytes, _ := json.MarshalIndent(models.Response{Status: 404, Message: "No players exist for team " + abbrev}, "", "    ")
+		w.Write(bytes)
 		return
 	}
 
@@ -75,6 +80,10 @@ func GetAllPlayers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	results, _ := json.MarshalIndent(players, "", "    ")
+	if len(players) == 0 {
+		w.Write([]byte("[]"))
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(results)
 }
@@ -88,7 +97,8 @@ func CreatePlayer(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 	_, err = db.PlayerCol.InsertOne(context.TODO(), player)
-	w.Write([]byte("Created Player: " + player.FirstName + " " + player.LastName))
+	bytes, _ := json.MarshalIndent(models.Response{Status: 200, Message: fmt.Sprintf("Created player: %s %s", player.FirstName, player.LastName)}, "", "    ")
+	w.Write(bytes)
 }
 
 func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
@@ -109,10 +119,11 @@ func UpdatePlayer(w http.ResponseWriter, r *http.Request) {
 	//response
 	if result.ModifiedCount > 0 {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Updated player with id: " + playerId))
+		bytes, _ := json.MarshalIndent(models.Response{Status: 200, Message: "Updated player with ID: " + playerId}, "", "    ")
+		w.Write(bytes)
 	} else {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No players were updated"))
+		w.Write(playerNotFound)
 	}
 }
 
@@ -125,10 +136,11 @@ func DeletePlayer(w http.ResponseWriter, r *http.Request) {
 
 	if result.DeletedCount == 0 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No player exists with Id \"" + playerId + "\""))
+		w.Write(playerNotFound)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprintf("Deleted player with Id \"" + playerId + "\"")))
+	bytes, _ := json.MarshalIndent(models.Response{Status: 200, Message: fmt.Sprintf("Deleted player with Id \"" + playerId + "\"")}, "", "    ")
+	w.Write(bytes)
 }

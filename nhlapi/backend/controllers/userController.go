@@ -16,16 +16,21 @@ import (
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	var user models.User
+	var (
+		user models.User
+		err  error
+	)
 	email := r.URL.Query().Get("email")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := db.UserCol.FindOne(ctx, bson.D{{"email", email}}).Decode(&user)
+	err = db.UserCol.FindOne(ctx, bson.D{{"email", email}}).Decode(&user)
 	if err != nil && err == mongo.ErrNoDocuments {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("User not found"))
+		bytes, _ := json.MarshalIndent(models.Response{Status: 404, Message: "User not found"}, "", "    ")
+
+		w.Write(bytes)
 		return
 	}
 	util.PrintErr(err)
