@@ -51,7 +51,7 @@ func main() {
 	/*
 		User Routes
 	*/
-
+	r.Get("/api/user", controllers.GetUser)
 	r.Post("/api/user", controllers.CreateUser)
 	r.Put("/api/user", controllers.UpdateUser)
 
