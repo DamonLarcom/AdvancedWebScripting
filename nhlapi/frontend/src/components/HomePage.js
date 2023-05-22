@@ -26,7 +26,7 @@ const HomePage = ({user}) => {
         }
         <div className='flex justify-center gap-10 flex-wrap p-10'>
             {
-                teams.sort((a,b) => a.name.full > b.name.full).map(team => (
+                teams.sort((a,b) => a.name.full.toLowerCase() > b.name.full.toLowerCase()).map(team => (
                     <TeamCard team={team} key={team.name.abbrev}/>
                 ))
             } 

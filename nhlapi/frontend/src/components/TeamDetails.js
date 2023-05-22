@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import conf from "../global.json"
 import { SyncLoader } from "react-spinners";
 import {Link} from 'react-router-dom'
+import Td from "./Td"
 
 const TeamDetails = () => {
     const [team, setTeam] = useState({})
@@ -46,9 +47,9 @@ const TeamDetails = () => {
                                 {
                                     team.players.map(player => (
                                         <tr className='hover:bg-slate-400' onClick={handlePlayerClick}>
-                                            <td>{player.first_name} {player.last_name}</td>
-                                            <td>{player.position}</td>
-                                            <td>{player.jersey}</td>
+                                            <Td to={`/players/${player.id}`}>{player.first_name} {player.last_name}</Td>
+                                            <Td to={`/players/${player.id}`}>{player.position}</Td>
+                                            <Td to={`/players/${player.id}`}>{player.jersey}</Td>
                                         </tr>
                                         
                                     ))
