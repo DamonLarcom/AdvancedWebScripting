@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import conf from "../global.json"
 import TeamCard from './Cards/TeamCard'
+import { Link } from 'react-router-dom'
 
 const HomePage = ({user}) => {
     const [teams, setTeams] = useState([])
@@ -18,7 +19,10 @@ const HomePage = ({user}) => {
         <p className='text-2xl'>Total teams: {teams.length}</p>
         {
             user? 
-                <a href="/teams/create" className='rounded-lg shadow-xl bg-slate-600 p-2 mt-5'>Create a team</a>
+                <div className='flex gap-2'>
+                    <Link to="/teams/create" className='rounded-lg shadow-xl bg-slate-600 p-2 mt-5'>Create a team</Link>
+                    <Link to="/players/create" className='rounded-lg shadow-xl bg-slate-600 p-2 mt-5'>Create a player</Link> 
+                </div> 
             :
                 <div className='text-lg'>
                     <p><a href="/login" className='text-blue-700 underline'>Log In</a> or <a href="/register" className='text-blue-700 underline'>Sign up</a> to create a team</p>

@@ -9,6 +9,7 @@ const TeamDetails = () => {
     const [team, setTeam] = useState({})
     const [loading, setLoading] = useState(true)
     let {abbrev} = useParams()
+    let user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(() => {
         fetch(conf.url + conf.endpoints.teams + `/${abbrev.toUpperCase()}?includePlayers=true`)
@@ -19,8 +20,12 @@ const TeamDetails = () => {
         })
     },[])
 
-    const handlePlayerClick = (e) => {
-        console.log(e)
+    const handleDeleteTeam = async() => {
+        let user = JSON.parse(localStorage.getItem("user"))
+        await fetch(conf.url + conf.endpoints.teams + `/${abbrev}?key=${user.key}`, {
+            method: "DELETE",
+        })
+        window.location = "/"
     }
 
     return (
@@ -29,7 +34,19 @@ const TeamDetails = () => {
                 <p className="text-lg text-white"><SyncLoader color="#88F"/></p>
             :
                 <div className='flex flex-col gap-5 text-center text-2xl w-full'>
-                    <Link to="/" className='text-xl shadow-lg rounded-lg bg-slate-400 p-2 w-40 mx-auto'>Back to home</Link>
+                    <div className='flex w-[40%] mx-auto'>
+                        <Link to="/" className='text-xl shadow-lg rounded-lg bg-slate-400 p-2 w-40 mx-auto'>Back to home</Link>
+                        {
+                            user?
+                                <>
+                                    <Link to={`/teams/${team.name.abbrev}/update`} className='text-xl shadow-lg rounded-lg bg-blue-400 p-2 w-40 mx-auto'>Update Team</Link>
+                                    <button onClick={handleDeleteTeam} className='text-xl shadow-lg rounded-lg bg-red-400 p-2 w-40 mx-auto'>Delete Team</button>
+                                </>
+                                :
+                                null
+                            
+                        }
+                    </div>
                     <h1 className='text-5xl'>{team.name.full} ({team.name.abbrev.toUpperCase()})</h1>
                     <p>Location: {team.location.city}</p>
                     <p>Arena: {team.location.arena_name}</p>
@@ -45,8 +62,8 @@ const TeamDetails = () => {
                                     <th>Jersey Number</th>
                                 </tr>
                                 {
-                                    team.players.map(player => (
-                                        <tr className='hover:bg-slate-400' onClick={handlePlayerClick}>
+                                    team.players.sort((a,b) => a.last_name > b.last_name).map(player => (
+                                        <tr className='hover:bg-slate-400'>
                                             <Td to={`/players/${player.id}`}>{player.first_name} {player.last_name}</Td>
                                             <Td to={`/players/${player.id}`}>{player.position}</Td>
                                             <Td to={`/players/${player.id}`}>{player.jersey}</Td>
