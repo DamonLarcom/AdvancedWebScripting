@@ -3,7 +3,6 @@ import conf from "../global.json"
 import { useParams } from 'react-router-dom'
 
 const UpdateTeam = () => {
-    const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
     const [team, setTeam] = useState({})
     const {abbrev} = useParams()
@@ -25,31 +24,24 @@ const UpdateTeam = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        setError(false)
-        if(!teamName.current.value.length > 0 ||!teamAbbrev.current.value.length > 0 
-            || !locationCity.current.value.length > 0 ||!arena.current.value.length > 0 || !division.current.value.length > 0 ) 
-        {
-            setError(true)
-        } else {
-            await fetch(conf.url + conf.endpoints.teams + `/${abbrev}?key=${JSON.parse(localStorage.getItem("user")).key}`, {
-                method: "PUT",
-                mode: "cors",
-                body: JSON.stringify(
-                    {
-                        name:{
-                            full: teamName.current.value,
-                            abbrev: teamAbbrev.current.value
-                        },
-                        location: {
-                            city: locationCity.current.value,
-                            arena_name: arena.current.value
-                        },
-                        division: division.current.value
-                    }
-                )
-            })
-            window.location = "/"
-        }
+        await fetch(conf.url + conf.endpoints.teams + `/${abbrev}?key=${JSON.parse(localStorage.getItem("user")).key}`, {
+            method: "PUT",
+            mode: "cors",
+            body: JSON.stringify(
+                {
+                    name:{
+                        full: teamName.current.value,
+                        abbrev: teamAbbrev.current.value
+                    },
+                    location: {
+                        city: locationCity.current.value,
+                        arena_name: arena.current.value
+                    },
+                    division: division.current.value
+                }
+            )
+        })
+        window.location = "/"
     }
     return (
         <div className='flex h-fit justify-center'>
@@ -69,14 +61,8 @@ const UpdateTeam = () => {
                             <option value="Central">Central</option>
                         </select>
                         <input type="submit" value="Update" className='rounded-xl shadow-lg text-2xl h-12 w-fit mx-auto p-2 bg-slate-200'/>
+                        <p className='text-lg text-white'>Or <a href="/" className='text-blue-500 underline'>Go Back Home</a></p>
                     </form>
-                    :
-                    null
-                }
-                
-                {
-                  error?
-                    <h1 className='text-red-500'>Not all fields are populated.</h1>
                     :
                     null
                 }

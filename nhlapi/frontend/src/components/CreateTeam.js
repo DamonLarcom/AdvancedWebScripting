@@ -54,7 +54,7 @@ const CreateTeam = () => {
                         <option value="Metropolitan">Metropolitan</option>
                         <option value="Central">Central</option>
                     </select>
-                    <input type="submit" value="Create Team" className='rounded-xl shadow-lg text-2xl h-12 w-[20%] mx-auto bg-slate-200'/>
+                    <input type="submit" value="Create Team" className='rounded-xl shadow-lg text-2xl h-16 w-fit mx-auto bg-slate-200'/>
                 </form>
                 {
                   error?
@@ -62,7 +62,7 @@ const CreateTeam = () => {
                     :
                     null
                 }
-                <p className='text-lg text-white'>Or <a href="/register" className='text-blue-500 underline'>Sign Up</a></p>
+                <p className='text-lg text-white'>Or <a href="/" className='text-blue-500 underline'>Go Back Home</a></p>
             </div> 
         </div>
       ) 
