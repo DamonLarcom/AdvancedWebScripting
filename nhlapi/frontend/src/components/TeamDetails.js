@@ -50,6 +50,7 @@ const TeamDetails = () => {
                     <h1 className='text-5xl'>{team.name.full} ({team.name.abbrev.toUpperCase()})</h1>
                     <p>Location: {team.location.city}</p>
                     <p>Arena: {team.location.arena_name}</p>
+                    <p>Division: {team.division}</p>
 
                     <div className='shadow-lg rounded-lg bg-slate-600 w-[50%] mx-auto mb-16 py-5'>
                         <h2 className='text-3xl underline'>Players</h2>

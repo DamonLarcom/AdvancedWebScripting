@@ -1,0 +1,354 @@
+[
+    {
+        "Name": {
+            "Full": "Carolina Hurricanes",
+            "Abbrev": "CAR"
+        },
+        "Location": {
+            "City": "Raleigh, NC, USA",
+            "ArenaName": "PNC Arena"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "Columbus Blue Jackets",
+            "Abbrev": "COL"
+        },
+        "Location": {
+            "City": "Columbus, OH, USA",
+            "ArenaName": "Nationwide Arena"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "New Jersey Devils",
+            "Abbrev": "NJ"
+        },
+        "Location": {
+            "City": "Newark, NJ, USA",
+            "ArenaName": "Prudential Center"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "New York Islanders",
+            "Abbrev": "NYI"
+        },
+        "Location": {
+            "City": "Elmont, NY, USA",
+            "ArenaName": "UBS Arena"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "New York Rangers",
+            "Abbrev": "NYR"
+        },
+        "Location": {
+            "City": "New York City, NY, USA",
+            "ArenaName": "Madison Square Garden"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "Philadelphia Flyers",
+            "Abbrev": "PHI"
+        },
+        "Location": {
+            "City": "Philadelphia, PA, USA",
+            "ArenaName": "Wells Fargo Center"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "Pittsburgh Penguins",
+            "Abbrev": "PIT"
+        },
+        "Location": {
+            "City": "Pittsburgh, PA, USA",
+            "ArenaName": "PPG Paints Arena"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "Washington Capitals",
+            "Abbrev": "WAS"
+        },
+        "Location": {
+            "City": "Washington, DC, USA",
+            "ArenaName": "Capitol One Arena"
+        },
+        "Division": "Metropolitan"
+    },
+    {
+        "Name": {
+            "Full": "Boston Bruins",
+            "Abbrev": "BOS"
+        },
+        "Location": {
+            "City": "Boston, MA, USA",
+            "ArenaName": "TD Garden"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Buffalo Sabres",
+            "Abbrev": "BUF"
+        },
+        "Location": {
+            "City": "Buffalo, NY, USA",
+            "ArenaName": "KeyBank Center"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Detroit Red Wings",
+            "Abbrev": "DET"
+        },
+        "Location": {
+            "City": "Detroit, MI, USA",
+            "ArenaName": "Little Caesars Arena"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Florida Panthers",
+            "Abbrev": "FLA"
+        },
+        "Location": {
+            "City": "Sunrise, FL, USA",
+            "ArenaName": "FLA Live Arena"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Montreal Canadiens",
+            "Abbrev": "MON"
+        },
+        "Location": {
+            "City": "Montreal, QC, CAN",
+            "ArenaName": "Centre Bell"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Ottawa Senators",
+            "Abbrev": "OTT"
+        },
+        "Location": {
+            "City": "Ottawa, ON, CAN",
+            "ArenaName": "Canadian Tire Centre"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Tampa Bay Lightning",
+            "Abbrev": "TB"
+        },
+        "Location": {
+            "City": "Tampa, FL, USA",
+            "ArenaName": "Amalie Arena"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Toronto Maple Leafs",
+            "Abbrev": "TOR"
+        },
+        "Location": {
+            "City": "Toronto, ON, CAN",
+            "ArenaName": "Scotiabank Arena"
+        },
+        "Division": "Atlantic"
+    },
+    {
+        "Name": {
+            "Full": "Arizona Coyotes",
+            "Abbrev": "ARI"
+        },
+        "Location": {
+            "City": "Tempe, AR, USA",
+            "ArenaName": "None"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Chicago Blackhawks",
+            "Abbrev": "CHI"
+        },
+        "Location": {
+            "City": "Chicago, IL, USA",
+            "ArenaName": "United Center"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Colorado Avalanche",
+            "Abbrev": "COL"
+        },
+        "Location": {
+            "City": "Denver, CO, USA",
+            "ArenaName": "Ball Arena"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Dallas Stars",
+            "Abbrev": "DAL"
+        },
+        "Location": {
+            "City": "Dallas, TX, USA",
+            "ArenaName": "American Airlines Center"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Minnesota Wild",
+            "Abbrev": "MIN"
+        },
+        "Location": {
+            "City": "Saint Paul, MN, USA",
+            "ArenaName": "Xcel Energy Center"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Nashville Predators",
+            "Abbrev": "NAS"
+        },
+        "Location": {
+            "City": "Nashville, TN, USA",
+            "ArenaName": "Bridgestone Arena"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "St Louis Blues",
+            "Abbrev": "STL"
+        },
+        "Location": {
+            "City": "St Louis, MO, USA",
+            "ArenaName": "Enterprise Center"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Winnipeg Jets",
+            "Abbrev": "WPG"
+        },
+        "Location": {
+            "City": "Winnipeg, MB, CAN",
+            "ArenaName": "Canada Life Centre"
+        },
+        "Division": "Central"
+    },
+    {
+        "Name": {
+            "Full": "Anaheim Ducks",
+            "Abbrev": "ANA"
+        },
+        "Location": {
+            "City": "Anaheim, CA, USA",
+            "ArenaName": "Honda Center"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Calgary Flames",
+            "Abbrev": "CGY"
+        },
+        "Location": {
+            "City": "Calgary, AB, CAN",
+            "ArenaName": "Scotiabank Saddledome"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Edmonton Oilers",
+            "Abbrev": "EDM"
+        },
+        "Location": {
+            "City": "Edmonton, AB, CAN",
+            "ArenaName": "Rogers Place"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Los Angeles Kings",
+            "Abbrev": "LA"
+        },
+        "Location": {
+            "City": "Los Angeles, CA, USA",
+            "ArenaName": "Crypto.com Arena"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "San Jose Sharks",
+            "Abbrev": "SJ"
+        },
+        "Location": {
+            "City": "San Jose, CA, USA",
+            "ArenaName": "SAP Center"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Seattle Kraken",
+            "Abbrev": "SEA"
+        },
+        "Location": {
+            "City": "Seattle, WA, USA",
+            "ArenaName": "Climate Pledge Arena"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Vancouver Canucks",
+            "Abbrev": "VAN"
+        },
+        "Location": {
+            "City": "Vancouver, BC, USA",
+            "ArenaName": "Rogers Arena"
+        },
+        "Division": "Pacific"
+    },
+    {
+        "Name": {
+            "Full": "Vegas Golden Knights",
+            "Abbrev": "VEG"
+        },
+        "Location": {
+            "City": "Las Vegas, NV, USA",
+            "ArenaName": "T-Mobile Arena"
+        },
+        "Division": "Pacific"
+    }
+]
