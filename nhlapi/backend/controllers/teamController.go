@@ -15,6 +15,10 @@ import (
 	"time"
 )
 
+var (
+	teamNotFound, _ = json.MarshalIndent(models.Response{Status: 404, Message: "Team not found"}, "", "    ")
+)
+
 func GetAllTeams(w http.ResponseWriter, r *http.Request) {
 	var teams []models.Team
 
@@ -57,7 +61,7 @@ func GetTeamByAbbrev(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil && err == mongo.ErrNoDocuments {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No team exists with abbreviation \"" + abbrev + "\""))
+		w.Write(teamNotFound)
 		return
 	}
 	util.PrintErr(err)
@@ -106,10 +110,12 @@ func UpdateTeam(w http.ResponseWriter, r *http.Request) {
 	//response
 	if result.ModifiedCount > 0 {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Updated team with abbrev: " + abbrev))
+		bytes, _ := json.MarshalIndent(models.Response{Status: 200, Message: "Updated team: " + abbrev}, "", "    ")
+		w.Write(bytes)
 	} else {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No team was updated"))
+		bytes, _ := json.MarshalIndent(models.Response{Status: 404, Message: "Team not found"}, "", "    ")
+		w.Write(bytes)
 	}
 }
 
@@ -120,7 +126,7 @@ func DeleteTeam(w http.ResponseWriter, r *http.Request) {
 	util.CheckErrInternal(err, w)
 	if result.DeletedCount == 0 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("No team exists with abbreviation \"" + abbrev + "\""))
+		w.Write(teamNotFound)
 		return
 	}
 
@@ -128,7 +134,8 @@ func DeleteTeam(w http.ResponseWriter, r *http.Request) {
 	util.PrintErr(err)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprintf("Deleted team \"" + abbrev + "\"")))
+	bytes, _ := json.MarshalIndent(models.Response{Status: 200, Message: "Deleted team: " + abbrev}, "", "    ")
+	w.Write(bytes)
 }
 
 func buildQuery(team models.Team) bson.D {
