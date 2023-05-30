@@ -10,8 +10,35 @@ import (
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
+	"time"
 )
+
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	var (
+		user models.User
+		err  error
+	)
+	email := r.URL.Query().Get("email")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	err = db.UserCol.FindOne(ctx, bson.D{{"email", email}}).Decode(&user)
+	if err != nil && err == mongo.ErrNoDocuments {
+		w.WriteHeader(http.StatusNotFound)
+		bytes, _ := json.MarshalIndent(models.Response{Status: 404, Message: "User not found"}, "", "    ")
+		w.Write(bytes)
+		return
+	}
+	util.PrintErr(err)
+
+	userBytes, err := json.Marshal(models.Response{Status: 200, Payload: user})
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(userBytes)
+}
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user models.User
