@@ -16,8 +16,8 @@ func main() {
 	r.Use(cors.AllowAll().Handler)
 
 	/*
-		ROUTES
-	*/
+	*	ROUTES
+	 */
 
 	//Unauthed Routes
 	r.Post("/user/register", controllers.RegisterUser)
