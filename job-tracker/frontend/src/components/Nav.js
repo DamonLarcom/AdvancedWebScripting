@@ -13,7 +13,7 @@ const Nav = () => {
     return (
     <nav className='flex justify-end text-white px-10 py-5'>
         {
-            user == null ?
+            !auth.user?
                 null
                 :
                 <div className='flex gap-10 items-center'>

@@ -24,6 +24,11 @@ func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 		util.ResNotFound(w)
 		return
 	}
+
+	w.Write(util.MarshalResponse(models.Response{Status: http.StatusOK, Data: struct {
+		Username         string `json:"username"`
+		RegistrationDate string `json:"registration_date"`
+	}{Username: user.Username, RegistrationDate: user.RegistrationDate}}))
 }
 
 func RegisterUser(w http.ResponseWriter, r *http.Request) {
