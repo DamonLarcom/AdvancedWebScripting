@@ -18,7 +18,7 @@ const Nav = () => {
                 :
                 <div className='flex gap-10 items-center'>
                     <div className='flex flex-col'>
-                        <p>Logged in as: {auth.user.username}</p>
+                        <p className="text-xl">Welcome, {auth.user.username}</p>
                     </div>
                     
                     <button onClick={handleLogout} className='shadow-xl rounded-lg bg-slate-500 p-2'>Log Out</button>

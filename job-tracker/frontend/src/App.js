@@ -4,19 +4,22 @@ import Home from './pages/Home'
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { AuthProvider } from './components/Auth';
-import Nav from './components/Nav';
+import CreateApplication from './pages/CreateApplication';
+import AppDetails from './pages/AppDetails';
 
 function App() {
+
   return (
     <AuthProvider>
       <div className="App min-h-screen bg-slate-800">
         <Router>
-          <Nav/>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
 
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path="/register" element={<Register/>}/>
+            <Route exact path="/app/create" element={<CreateApplication/>}/>
+            <Route exact path="/app/:id" element={<AppDetails/>}/>
 
             <Route path="*" element={<NotFound/>}/>
           </Routes>

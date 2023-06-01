@@ -1,9 +1,13 @@
 import {useState} from 'react'
+import conf from "../conf.json"
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
     const [error, setError] = useState(false)
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
+
+    const navigate = useNavigate()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -11,6 +15,12 @@ const Register = () => {
 
         if(user.length === 0 || pass.length === 0) {
             setError(true)
+        } else {
+            fetch(conf.url + "/user/register", {
+                method: "POST",
+                body: JSON.stringify({username: user, password: pass})
+            })
+            navigate("/login")
         }
     }
 

@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 	"time"
 )
@@ -36,6 +37,20 @@ func GetApplicationsByUser(w http.ResponseWriter, r *http.Request) {
 	w.Write(util.MarshalResponse(models.Response{Status: http.StatusOK, Data: apps}))
 }
 
+func GetApplicationById(w http.ResponseWriter, r *http.Request) {
+	var app models.Application
+	appId := chi.URLParam(r, "id")
+	id, _ := primitive.ObjectIDFromHex(appId)
+
+	err := db.JobsCollection.FindOne(context.TODO(), bson.D{{"_id", id}}).Decode(&app)
+	if err != nil && err == mongo.ErrNoDocuments {
+		util.ResNotFound(w)
+		return
+	}
+
+	w.Write(util.MarshalResponse(models.Response{Status: http.StatusOK, Data: app}))
+}
+
 func CreateApplication(w http.ResponseWriter, r *http.Request) {
 	var app models.Application
 	user := chi.URLParam(r, "username")
@@ -43,6 +58,7 @@ func CreateApplication(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&app)
 	util.PrintErr(err)
 
+	app.AppId = primitive.NewObjectID()
 	app.UserId = user
 	app.ApplicationDate = time.Now().Format("01/02/2006 15:04")
 
@@ -63,15 +79,13 @@ func UpdateBaseApplication(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&app)
 	util.PrintErr(err)
 
-	changes := make([]bson.D, 0)
-	if len(app.Status) > 0 {
-		changes = append(changes, bson.D{{"$set", bson.D{{"Status", app.Status}}}})
-	}
-	if len(app.Skills) > 0 {
-		changes = append(changes, bson.D{{"$push", bson.D{{"Skills", bson.D{{"$each", app.Skills}}}}}})
-	}
-
-	results, err := db.JobsCollection.UpdateOne(context.TODO(), bson.D{{"_id", id}}, changes)
+	results, err := db.JobsCollection.UpdateOne(context.TODO(), bson.D{{"_id", id}}, bson.D{{"$set", bson.D{
+		{"Company", app.Company},
+		{"Title", app.Title},
+		{"Status", app.Status},
+		{"Link", app.Link},
+		{"Skills", app.Skills},
+		{"Notes", app.Notes}}}})
 	util.PrintErr(err)
 	if results.MatchedCount == 0 {
 		util.ResNotFound(w)

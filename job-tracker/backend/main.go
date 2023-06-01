@@ -28,6 +28,7 @@ func main() {
 
 		//Applications Endpoints
 		r.Get("/apps/{username}", controllers.GetApplicationsByUser)
+		r.Get("/apps/id/{id}", controllers.GetApplicationById)
 		r.Post("/apps/{username}", controllers.CreateApplication)
 		r.Put("/apps/{id}", controllers.UpdateBaseApplication)
 		r.Put("/apps/{id}/notes", controllers.AddApplicationNote)
