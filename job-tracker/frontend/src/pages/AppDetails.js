@@ -123,8 +123,8 @@ const AppDetails = () => {
                             null
                         }
                     </div>
-                    <div className='w-full p-10'>
-                        <h2 className='text-2xl'>Skills</h2>
+                    <div className='w-full p-10 flex flex-col gap-2'>
+                        <h2 className='text-2xl border-b-4 border-black'>Skills</h2>
                         {isEditable?
                             <div className='flex justify-center mb-5 text-black'>
                                 <input type="text" placeholder="Skill" value={skill} onChange={(e) => setSkill(e.target.value)} className='h-10 rounded-lg p-2 w-full'/>
