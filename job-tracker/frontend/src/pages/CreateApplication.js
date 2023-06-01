@@ -47,7 +47,7 @@ const CreateApplication = () => {
         e.preventDefault()
 
         if(skill.includes(",")) {
-            let skillsList = skill.split(",").concat(skills)
+            let skillsList = skill.split(",").concat(skills).filter(item => item.length > 0)
             setSkills(skillsList)
         } else {
             setSkills([...skills, skill])
@@ -93,7 +93,7 @@ const CreateApplication = () => {
                                         <AiOutlinePlus/>
                                     </button>
                                 </div>
-                                <div className='flex flex-wrap w-96 h-fit rounded-lg bg-slate-200 gap-1 p-1 max-h-56 overflow-scroll'>
+                                <div className='flex flex-wrap w-96 h-fit rounded-lg gap-1 p-1 max-h-56 overflow-scroll'>
                                     {skills.length === 0?
                                         <p>No Skills added yet.</p>
                                         :

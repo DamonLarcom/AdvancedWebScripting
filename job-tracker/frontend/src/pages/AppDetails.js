@@ -48,14 +48,20 @@ const AppDetails = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault()
-        fetch(conf.url + `/apps/${id}`, {
-            method: "PUT",
-            mode: "cors",
-            headers :{
-                "Authorization" : JSON.parse(localStorage.getItem("creds"))
-            },
-            body: JSON.stringify({company: company, title: roleTitle, status: status, link: link, skills: skills})
-        }).then(navigate(`/`))
+        setError(false)
+
+        if(company.length === 0 || status.length === 0) {
+            setError(true)
+        } else{
+            fetch(conf.url + `/apps/${id}`, {
+                method: "PUT",
+                mode: "cors",
+                headers :{
+                    "Authorization" : JSON.parse(localStorage.getItem("creds"))
+                },
+                body: JSON.stringify({company: company, title: roleTitle, status: status, link: link, skills: skills})
+            }).then(navigate(`/`))
+        }
     }
 
     const addSkill = (e,skill) => {
@@ -64,9 +70,9 @@ const AppDetails = () => {
         if(skill.includes(",")) {
             let skillsList
             if(skills) {
-                skillsList = skill.split(",").concat(skills)
+                skillsList = skill.split(",").concat(skills).filter(item => item.length > 0)
             } else {
-                skillsList = skill.split(",")
+                skillsList = skill.split(",").filter(item => item.length > 0)
             }
             setSkills(skillsList)
         } else {
@@ -97,18 +103,22 @@ const AppDetails = () => {
                     </button>
                 </div>
                 <div className='flex text-white'>
-                    <div className='w-full text-black flex flex-col gap-5'>
+                    <div className='w-full text-black flex flex-col gap-2'>
                         <div className='flex gap-5 mx-auto'>
-                            <h2 className='text-2xl'>Details</h2>
+                            <h2 className='text-2xl text-white'>Details</h2>
                             {isEditable?
                                 <p className='text-2xl text-green-600 font-bold'>Edits Enabled</p>
                                 :
                                 <p className='text-2xl text-red-600 font-bold'>Edits Disabled</p>
                             }
                         </div>
+                        <label className='text-left text-md'>Company</label>
                         <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
+                        <label className='text-left text-md'>Role Title</label>
                         <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
+                        <label className='text-left text-md'>Link</label>
                         <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
+                        <label className='text-left text-md'>Status</label>
                         <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
                             <option value="">--Select Application Status--</option>
                             <option value="Submitted">Submitted</option>
