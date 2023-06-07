@@ -10,7 +10,7 @@ const pageRange = (data, perPage) => {
 }
 
 const sliceData = (data, page, perPage) => {
-    return data.slice((page - 1) * perPage, page * perPage)
+    return data.slice((page - 1) * perPage, page * perPage).sort((a,b) => a.application_date < b.application_date)
 }
 
 const usePaginate = (data, page, perPage) => {

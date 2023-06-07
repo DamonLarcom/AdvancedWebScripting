@@ -44,11 +44,11 @@ const Home = () => {
   },[filter])
 
   return (
-    <div className='max-h-screen flex flex-col text-white'>
+    <div className='h-screen flex flex-col text-white overflow-auto'>
       <Nav/>
       {
         auth.user?
-            <div className='h-screen m-10 w-3/4 mx-auto'>
+            <div className='h-full w-3/4 mx-auto'>
               {loading?
                 <div className='flex mx-auto justify-center'>
                   <SyncLoader color="#FFF" />
@@ -62,7 +62,7 @@ const Home = () => {
                       <AiOutlinePlus/> Add Application
                     </button>
                   </div>
-                  <Table apps={filteredApps} perPage={12}/>
+                  <Table apps={filteredApps} perPage={15}/>
                 </>}
             </div>
         :

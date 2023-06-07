@@ -10,30 +10,34 @@ const Table = ({apps, perPage}) => {
     const noApplications = slice.length === 0
 
   return (
-    <div>
-        <table className='w-full border-2 border-white'>
-            <tr>
-                <th>Company</th>
-                <th>Status</th>
-                <th>Title</th>
-                <th>Date Applied</th>
-                <th className='w-1/3'>Link</th>
-            </tr>
-            {
-                !noApplications?
-                slice.sort((a,b) => a.application_date < b.application_date).map((app, index) => (
-                    <ApplicationRow app={app} key={index}/>
-                ))
-                :
-                null
-            }
+    <>
+        <table className='w-full h-fit border-2 border-white'>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Status</th>
+                    <th>Title</th>
+                    <th>Date Applied</th>
+                    <th className='w-1/3'>Link</th>
+                </tr>
+            </thead>
+            <tbody className='overflow-y-hidden'>
+                {
+                    !noApplications?
+                    slice.map((app, index) => (
+                        <ApplicationRow app={app} key={index}/>
+                    ))
+                    :
+                    null
+                }
+            </tbody>
         </table>
         {noApplications? 
             <h1 className='text-xl mt-2 text-center'>No Applications to show.</h1>
             :
             <TableFooter range={range} page={page} setPage={setPage} slice={slice}/>
         }
-    </div>
+    </>
   )
 }
 

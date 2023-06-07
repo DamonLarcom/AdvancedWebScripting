@@ -96,71 +96,76 @@ const AppDetails = () => {
         {loading?
             <SyncLoader color="#FFF"/>
             :
-            <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 h-fit text-center p-5 flex flex-col'>
-                <div className='flex justify-center m-5'>
-                    <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-yellow-500 text-black' onClick={() => {setEditable(!isEditable)}}>
-                        <AiOutlinePlus/> Toggle Edit Mode
-                    </button>
-                </div>
-                <div className='flex text-white'>
-                    <div className='w-full text-black flex flex-col gap-2'>
-                        <div className='flex gap-5 mx-auto'>
-                            <h2 className='text-2xl text-white'>Details</h2>
+            <div className='flex gap-5'>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-full h-fit text-center p-5 flex flex-col'>
+                    <div className='flex justify-center m-5'>
+                        <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-yellow-500 text-black' onClick={() => {setEditable(!isEditable)}}>
+                            <AiOutlinePlus/> Toggle Edit Mode
+                        </button>
+                    </div>
+                    <div className='flex text-white'>
+                        <div className='w-full text-black flex flex-col gap-2'>
+                            <div className='flex gap-5 mx-auto'>
+                                <h2 className='text-2xl text-white'>Details</h2>
+                                {isEditable?
+                                    <p className='text-2xl text-green-600 font-bold'>Edits Enabled</p>
+                                    :
+                                    <p className='text-2xl text-red-600 font-bold'>Edits Disabled</p>
+                                }
+                            </div>
+                            <label className='text-left text-md text-white'>Company</label>
+                            <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
+                            <label className='text-left text-md text-white'>Role Title</label>
+                            <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
+                            <label className='text-left text-md text-white'>Link</label>
+                            <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
+                            <label className='text-left text-md text-white'>Status</label>
+                            <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
+                                <option value="">--Select Application Status--</option>
+                                <option value="Submitted">Submitted</option>
+                                <option value="Rejected">Rejected</option>
+                                <option value="Interviewing">Interviewing</option>
+                                <option value="Deferred">Deferred for another role</option>
+                            </select>
                             {isEditable?
-                                <p className='text-2xl text-green-600 font-bold'>Edits Enabled</p>
+                                <button disabled={!isEditable} className={'flex justify-center rounded-full w-fit p-5 h-[25px] items-center text-black bg-blue-500'}
+                                    onClick={handleUpdate}>Apply Changes</button>
                                 :
-                                <p className='text-2xl text-red-600 font-bold'>Edits Disabled</p>
+                                null
                             }
                         </div>
-                        <label className='text-left text-md text-white'>Company</label>
-                        <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md text-white'>Role Title</label>
-                        <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md text-white'>Link</label>
-                        <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md text-white'>Status</label>
-                        <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
-                            <option value="">--Select Application Status--</option>
-                            <option value="Submitted">Submitted</option>
-                            <option value="Rejected">Rejected</option>
-                            <option value="Interviewing">Interviewing</option>
-                            <option value="Deferred">Deferred for another role</option>
-                        </select>
-                        {isEditable?
-                            <button disabled={!isEditable} className={'flex justify-center rounded-full w-fit p-5 h-[25px] items-center text-black bg-blue-500'}
-                                onClick={handleUpdate}>Apply Changes</button>
-                            :
-                            null
-                        }
+                        <div className='w-full p-10 flex flex-col gap-2'>
+                            <h2 className='text-2xl border-b-4 border-black'>Skills</h2>
+                            {isEditable?
+                                <div className='flex justify-center mb-5 text-black'>
+                                    <input type="text" placeholder="Skill" value={skill} onChange={(e) => setSkill(e.target.value)} className='h-10 rounded-lg p-2 w-full'/>
+                                    <button className='flex rounded-full w-auto h-10 p-3 mx-2 bg-green-500 text-black' onClick={(e) => addSkill(e,skill)}>
+                                        <AiOutlinePlus/>
+                                    </button>
+                                </div>
+                                :
+                                null
+                            }
+                            {skills?
+                                <div className='flex justify-center flex-wrap gap-2'>
+                                    {skills.map((skill, index) => (
+                                        <div className='flex w-fit h-fit px-2 bg-slate-400 rounded-lg shadow-lg text-xl items-center gap-1'>
+                                            <p>{skill}</p>
+                                            {isEditable? <TiDelete className='text-xl items' onClick={() => removeSkill(index)}/>: null}
+                                        </div>
+                                    ))}
+                                </div>
+                                :
+                                <h1>No Skills to display</h1>
+                            }
+                        </div>
                     </div>
-                    <div className='w-full p-10 flex flex-col gap-2'>
-                        <h2 className='text-2xl border-b-4 border-black'>Skills</h2>
-                        {isEditable?
-                            <div className='flex justify-center mb-5 text-black'>
-                                <input type="text" placeholder="Skill" value={skill} onChange={(e) => setSkill(e.target.value)} className='h-10 rounded-lg p-2 w-full'/>
-                                <button className='flex rounded-full w-auto h-10 p-3 mx-2 bg-green-500 text-black' onClick={(e) => addSkill(e,skill)}>
-                                    <AiOutlinePlus/>
-                                </button>
-                            </div>
-                            :
-                            null
-                        }
-                        {skills?
-                            <div className='flex justify-center flex-wrap gap-2'>
-                                {skills.map((skill, index) => (
-                                    <div className='flex w-fit h-fit px-2 bg-slate-400 rounded-lg shadow-lg text-xl items-center gap-1'>
-                                        <p>{skill}</p>
-                                        {isEditable? <TiDelete className='text-xl items' onClick={() => removeSkill(index)}/>: null}
-                                    </div>
-                                ))}
-                            </div>
-                            :
-                            <h1>No Skills to display</h1>
-                        }
-                    </div>
+                    {error? <p className='text-red-600 text-md'>Company Name & Status are required fields</p> : null}
+                    <Link to="/login" className='text-xl underline text-blue-500 mt-10'>Back to home</Link>
                 </div>
-                {error? <p className='text-red-600 text-md'>Company Name & Status are required fields</p> : null}
-                <Link to="/login" className='text-xl underline text-blue-500 mt-10'>Back to home</Link>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-full h-fit text-center p-5 flex flex-col'>
+
+                </div>
             </div>
         }
     </div>
