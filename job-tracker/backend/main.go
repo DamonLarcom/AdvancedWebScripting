@@ -24,7 +24,7 @@ func main() {
 
 	//Authed Routes
 	r.Group(func(r chi.Router) {
-		r.Use(middleware.Basic())
+		r.Use(middleware.Basic)
 
 		//Applications Endpoints
 		r.Get("/apps/{username}", controllers.GetApplicationsByUser)

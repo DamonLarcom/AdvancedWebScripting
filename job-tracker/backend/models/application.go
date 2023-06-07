@@ -1,6 +1,9 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
+)
 
 type Application struct {
 	AppId           primitive.ObjectID `json:"id" bson:"_id"`
@@ -9,13 +12,13 @@ type Application struct {
 	Title           string             `json:"title" bson:"Title"`
 	Status          string             `json:"status" bson:"Status"`
 	Link            string             `json:"link" bson:"Link"`
-	ApplicationDate string             `json:"application_date" bson:"ApplicationDate"`
+	ApplicationDate time.Time          `json:"application_date" bson:"ApplicationDate"`
 	Skills          []string           `json:"skills,omitempty" bson:"Skills"`
 	Notes           []ApplicationNote  `json:"notes,omitempty" bson:"Notes"`
 }
 
 type ApplicationNote struct {
-	NoteTitle string `json:"note_title" bson:"NoteTitle"`
-	NoteDate  string `json:"note_date" bson:"NoteDate"`
-	Content   string `json:"content" bson:"Content"`
+	Title   string    `json:"title" bson:"Title"`
+	Date    time.Time `json:"date" bson:"Date"`
+	Content string    `json:"content" bson:"Content"`
 }

@@ -60,11 +60,11 @@ func CreateApplication(w http.ResponseWriter, r *http.Request) {
 
 	app.AppId = primitive.NewObjectID()
 	app.UserId = user
-	app.ApplicationDate = time.Now().Format("01/02/2006 15:04")
+	app.ApplicationDate = time.Now().UTC()
 
 	//set note date for each note
 	for i := range app.Notes {
-		app.Notes[i].NoteDate = time.Now().Format("01/02/2006 15:04")
+		app.Notes[i].Date = time.Now().UTC()
 	}
 
 	_, err = db.JobsCollection.InsertOne(context.TODO(), app)
@@ -104,7 +104,7 @@ func AddApplicationNote(w http.ResponseWriter, r *http.Request) {
 	util.PrintErr(err)
 
 	for i := range notes {
-		notes[i].NoteDate = time.Now().Format("01/02/2006 15:04")
+		notes[i].Date = time.Now().UTC()
 	}
 
 	results, err := db.JobsCollection.UpdateOne(context.TODO(), bson.D{{"_id", id}},

@@ -12,19 +12,17 @@ import (
 
 type BasicAuth func(http.Handler) http.Handler
 
-func Basic() BasicAuth {
-	return func(h http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			//return 401 if no auth is provided
-			email, password, ok := r.BasicAuth()
-			if !ok || !verifyUser(email, password) {
-				authFailed(w)
-				return
-			}
+func Basic(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		//return 401 if no auth is provided
+		email, password, ok := r.BasicAuth()
+		if !ok || !verifyUser(email, password) {
+			authFailed(w)
+			return
+		}
 
-			h.ServeHTTP(w, r)
-		})
-	}
+		h.ServeHTTP(w, r)
+	})
 }
 
 func authFailed(w http.ResponseWriter) {
