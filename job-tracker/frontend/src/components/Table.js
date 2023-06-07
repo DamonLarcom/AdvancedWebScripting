@@ -11,7 +11,7 @@ const Table = ({apps, perPage}) => {
 
   return (
     <div>
-        <table className='w-full h-full overflow-y-scroll border-2 border-white'>
+        <table className='w-full border-2 border-white'>
             <tr>
                 <th>Company</th>
                 <th>Status</th>

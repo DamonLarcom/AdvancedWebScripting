@@ -62,7 +62,7 @@ const Home = () => {
                       <AiOutlinePlus/> Add Application
                     </button>
                   </div>
-                  <Table apps={filteredApps} perPage={10}/>
+                  <Table apps={filteredApps} perPage={12}/>
                 </>}
             </div>
         :
