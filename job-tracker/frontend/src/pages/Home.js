@@ -3,17 +3,15 @@ import Nav from '../components/Nav'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../components/Auth'
 import conf from "../conf.json"
-import ApplicationRow from '../components/ApplicationRow'
 import {AiOutlinePlus} from 'react-icons/ai'
 import { SyncLoader } from "react-spinners";
+import Table from '../components/Table'
 
 const Home = () => {
   const [apps, setApps] = useState([])
   const [filteredApps, setFilteredApps] = useState([])
   const [filter, setFilter] = useState("")
   const [loading, setLoading] = useState(true)
-
-  const noApplications = filteredApps.length === 0
 
   const auth = useAuth()
   const navigate = useNavigate()
@@ -46,7 +44,7 @@ const Home = () => {
   },[filter])
 
   return (
-    <div className='h-screen flex flex-col text-white'>
+    <div className='max-h-screen flex flex-col text-white'>
       <Nav/>
       {
         auth.user?
@@ -64,24 +62,7 @@ const Home = () => {
                       <AiOutlinePlus/> Add Application
                     </button>
                   </div>
-                  <table className='w-full h-fit overflow-y-scroll border-2 border-white'>
-                    <tr>
-                      <th>Company</th>
-                      <th>Status</th>
-                      <th>Title</th>
-                      <th>Date Applied</th>
-                      <th className='w-1/3'>Link</th>
-                    </tr>
-                    {
-                      !noApplications?
-                        filteredApps.sort((a,b) => a.application_date < b.application_date).map((app, index) => (
-                          <ApplicationRow app={app} key={index} onClick={() => console.log("clicked")}/>
-                        ))
-                      :
-                      null
-                    }
-                  </table>
-                  {noApplications? <h1 className='text-xl mt-2 text-center'>No Applications to show.</h1>: null}
+                  <Table apps={filteredApps} perPage={10}/>
                 </>}
             </div>
         :

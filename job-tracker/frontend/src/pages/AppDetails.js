@@ -112,13 +112,13 @@ const AppDetails = () => {
                                 <p className='text-2xl text-red-600 font-bold'>Edits Disabled</p>
                             }
                         </div>
-                        <label className='text-left text-md'>Company</label>
+                        <label className='text-left text-md text-white'>Company</label>
                         <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md'>Role Title</label>
+                        <label className='text-left text-md text-white'>Role Title</label>
                         <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md'>Link</label>
+                        <label className='text-left text-md text-white'>Link</label>
                         <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
-                        <label className='text-left text-md'>Status</label>
+                        <label className='text-left text-md text-white'>Status</label>
                         <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
                             <option value="">--Select Application Status--</option>
                             <option value="Submitted">Submitted</option>
