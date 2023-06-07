@@ -93,7 +93,7 @@ const CreateApplication = () => {
                                         <AiOutlinePlus/>
                                     </button>
                                 </div>
-                                <div className='flex flex-wrap w-96 h-fit rounded-lg gap-1 p-1 max-h-56 overflow-scroll'>
+                                <div className='flex flex-wrap w-96 h-fit rounded-lg gap-1 p-1 max-h-56 overflow-y-scroll'>
                                     {skills.length === 0?
                                         <p>No Skills added yet.</p>
                                         :

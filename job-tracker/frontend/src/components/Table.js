@@ -35,7 +35,7 @@ const Table = ({apps, perPage}) => {
         {noApplications? 
             <h1 className='text-xl mt-2 text-center'>No Applications to show.</h1>
             :
-            <TableFooter range={range} page={page} setPage={setPage} slice={slice}/>
+            <TableFooter len={apps.length} range={range} page={page} setPage={setPage} slice={slice}/>
         }
     </>
   )

@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom'
 import { AiOutlinePlus } from 'react-icons/ai'
 import {TiDelete} from "react-icons/ti"
 import { useNavigate } from 'react-router-dom'
+import Accordion from '../components/Accordion'
 
 const AppDetails = () => {
     const [application, setApplication] = useState({})
@@ -15,6 +16,7 @@ const AppDetails = () => {
     const [link, setLink] = useState("")
     const [skills, setSkills] = useState([])
     const [skill, setSkill] = useState('')
+    const [notes, setNotes] = useState([])
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -43,6 +45,7 @@ const AppDetails = () => {
         setStatus(application.status)
         setLink(application.link)
         setSkills(application.skills)
+        setNotes(application.notes)
         setLoading(false)
     }, [application])
 
@@ -97,7 +100,7 @@ const AppDetails = () => {
             <SyncLoader color="#FFF"/>
             :
             <div className='flex gap-5 w-full m-10'>
-                <div className='bg-slate-600 rounded-xl shadow-xl w-full h-fit text-center p-5 flex flex-col'>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-full h-full text-center p-5 flex flex-col'>
                     <div className='flex justify-center m-5'>
                         <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-yellow-500 text-black' onClick={() => {setEditable(!isEditable)}}>
                             <AiOutlinePlus/> Toggle Edit Mode
@@ -163,8 +166,28 @@ const AppDetails = () => {
                     {error? <p className='text-red-600 text-md'>Company Name & Status are required fields</p> : null}
                     <Link to="/login" className='text-xl underline text-blue-500 mt-10'>Back to home</Link>
                 </div>
-                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 h-fit text-center p-5 flex flex-col'>
-                    <h2 className="text-2xl text-white">Notes</h2>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 min-h-full text-center p-5 flex flex-col items-center'>
+                    <div className='flex justify-items-center gap-2'>
+                        <h2 className="text-2xl text-white">Notes</h2>
+                        {isEditable?
+                            <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black' onClick={() => {setEditable(!isEditable)}}>
+                                <AiOutlinePlus/> Add Note
+                            </button>
+                            :
+                            null
+                        }
+                        
+                    </div>
+                    <div className='flex flex-col rounded-xl bg-slate-700 h-full w-full m-2 overflow-y-scroll gap-1'>
+                        {
+                            notes? 
+                                notes.map((note) => (
+                                    <Accordion item={note} isEdit={isEditable}/>
+                                ))
+                            :
+                            <p className='text-xl text-white'>No notes to display.</p>
+                        }
+                    </div>
                 </div>
             </div>
         }
