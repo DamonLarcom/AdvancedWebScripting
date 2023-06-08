@@ -6,7 +6,7 @@ const Accordion = ({item, isEdit}) => {
     const [open, setOpen] = useState(false)
 
     return (
-    <div className='flex flex-col w-full max-w-full bg-slate-500 rounded-xl p-3 justify-center cursor-pointer text-white' 
+    <div className='flex flex-col w-full max-w-full bg-slate-500 rounded-xl p-3 justify-center cursor-pointer text-white select-none' 
         onClick={() => setOpen(!open)}>
         <div className='flex justify-between text-2xl'>
             <p className={open? "border-b-2 border-white": ""}><strong>{item.title}</strong></p>
