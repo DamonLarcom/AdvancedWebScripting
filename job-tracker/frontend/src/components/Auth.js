@@ -7,7 +7,6 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         if(localStorage.getItem("user") !== null) {
-            console.log("auth found")
             setUser(JSON.parse(localStorage.getItem("user")))
         }
     },[])

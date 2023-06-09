@@ -31,7 +31,7 @@ const Home = () => {
       .then(res => res.json())
       .then(data => {
         if(data.data) {
-          setApps(data.data)
+          setApps(data.data.sort((a,b) => a.application_date < b.application_date))
           setFilteredApps(data.data)
         }
         setLoading(false)
@@ -63,7 +63,7 @@ const Home = () => {
                       <AiOutlinePlus/> Add Application
                     </button>
                   </div>
-                  <Table apps={filteredApps} perPage={15}/>
+                  <Table apps={filteredApps} perPage={25}/>
                 </>}
             </div>
         :

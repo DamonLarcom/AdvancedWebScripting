@@ -40,6 +40,7 @@ const AppDetails = () => {
     },[])
 
     useEffect(() => {
+        console.log(application)
         setCompany(application.company)
         setRoleTitle(application.title)
         setStatus(application.status)
@@ -110,7 +111,7 @@ const AppDetails = () => {
                         </Link>
                         
                     </div>
-                    <div className='flex text-white'>
+                    <div className='grid grid-cols-2 text-white'>
                         <div className='w-full text-black flex flex-col gap-2'>
                             <div className='flex gap-5 mx-auto'>
                                 <h2 className='text-2xl text-white'>Details</h2>
@@ -125,10 +126,17 @@ const AppDetails = () => {
                             <label className='text-left text-md text-white'>Role Title<span className='text-red-400'>*</span></label>
                             <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
                             <label className='text-left text-md text-white'>Link</label>
-                            {!isEditable?
-                                <a href={link} className='text-xl text-start underline text-blue-500 whitespace-nowrap text-ellipsis block overflow-hidden max-w-full'>{link}</a>
+                            {link && !isEditable?
+                                link.startsWith("https://") || link.startsWith("http://")?
+                                    <a href={link} target="_blank" rel="noreferrer" className='flex justify-center rounded-full w-fit p-5 h-[25px] items-center text-black bg-blue-500'>Go to Job Posting</a>
+                                    :
+                                    <>
+                                        <p className='text-red-500 text-xl text-start'>Missing or invalid link.</p>
+                                        <p className='text-red-500 text-md text-start'>Links must begin with https:// or http://</p>
+                                    </>
+                                    
                                 :
-                                 <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
+                                <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
                             }
                             <label className='text-left text-md text-white'>Status<span className='text-red-400'>*</span></label>
                             <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>

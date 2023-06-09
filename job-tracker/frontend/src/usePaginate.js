@@ -23,9 +23,6 @@ const usePaginate = (data, page, perPage) => {
 
         const slice = sliceData(data, page, perPage)
         setSlice([...slice])
-
-        console.log(range)
-        console.log(slice)
     }, [data, setRange, setSlice, page])
 
     return {slice, range}

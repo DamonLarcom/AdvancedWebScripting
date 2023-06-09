@@ -34,7 +34,7 @@ const TableFooter = ({len, range, page, setPage, slice}) => {
 
   return (
     <div className='w-full bg-slate-600 h-10 flex justify-end items-center border-2 border-white gap-2 px-10'>
-        <h2>{len > 1? len + " applications": len + " application"}</h2>
+        <h2>{len} {len > 1? "applications": "application"}</h2>
         <button className='flex justify-center items-center p-3 font-bold rounded-full shadow-lg bg-slate-400 h-5 w-fit'
             onClick={handleFirst}>
             <MdFirstPage/>
