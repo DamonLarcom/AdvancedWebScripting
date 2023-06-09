@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/damonlarcom/advancedwebscripting/job-tracker/db"
 	"github.com/damonlarcom/advancedwebscripting/job-tracker/models"
 	"github.com/damonlarcom/advancedwebscripting/job-tracker/util"
@@ -103,6 +104,7 @@ func AddApplicationNote(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&notes)
 	util.PrintErr(err)
 
+	fmt.Println(notes)
 	for i := range notes {
 		notes[i].Date = time.Now().UTC()
 	}

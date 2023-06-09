@@ -14,7 +14,7 @@ type Application struct {
 	Link            string             `json:"link" bson:"Link"`
 	ApplicationDate time.Time          `json:"application_date" bson:"ApplicationDate"`
 	Skills          []string           `json:"skills,omitempty" bson:"Skills"`
-	Notes           []ApplicationNote  `json:"notes,omitempty" bson:"Notes"`
+	Notes           []ApplicationNote  `json:"notes,omitempty" bson:"Notes,omitempty"`
 }
 
 type ApplicationNote struct {
