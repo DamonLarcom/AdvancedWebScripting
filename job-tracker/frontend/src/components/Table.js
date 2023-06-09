@@ -14,11 +14,11 @@ const Table = ({apps, perPage}) => {
         <table className='w-full h-fit border-2 border-white'>
             <thead>
                 <tr>
-                    <th>Company</th>
-                    <th>Status</th>
-                    <th>Title</th>
-                    <th>Date Applied</th>
-                    <th className='w-1/3'>Link</th>
+                    <th className='w-1/5'>Company</th>
+                    <th className='w-1/6'>Status</th>
+                    <th className='w-1/5'>Title</th>
+                    <th className='w-1/5'>Date Applied</th>
+                    <th className='w-1/5'>Link</th>
                 </tr>
             </thead>
             <tbody className='overflow-y-hidden'>

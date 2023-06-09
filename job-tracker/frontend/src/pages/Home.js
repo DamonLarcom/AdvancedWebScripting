@@ -3,7 +3,7 @@ import Nav from '../components/Nav'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../components/Auth'
 import conf from "../conf.json"
-import {AiOutlinePlus} from 'react-icons/ai'
+import {AiOutlinePlus, AiOutlineSearch} from 'react-icons/ai'
 import { SyncLoader } from "react-spinners";
 import Table from '../components/Table'
 
@@ -56,8 +56,9 @@ const Home = () => {
                 
               :
                 <>
-                  <div className='flex justify-end m-2 text-xl gap-5'>
-                    <input type="text" placeholder='Filter applications' className='rounded-full text-center text-black' onChange={e => setFilter(e.target.value)}/>
+                  <div className='flex justify-end items-center m-2 text-xl gap-3'>
+                    <AiOutlineSearch className='text-3xl'/>
+                    <input type="text" className='rounded-full text-center text-black h-[25px] p-5' onChange={e => setFilter(e.target.value)}/>
                     <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black' onClick={() => navigate("/app/create")}>
                       <AiOutlinePlus/> Add Application
                     </button>

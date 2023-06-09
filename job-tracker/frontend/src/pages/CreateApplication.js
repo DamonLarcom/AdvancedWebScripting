@@ -23,7 +23,7 @@ const CreateApplication = () => {
         e.preventDefault()
         setError(false)
 
-        if(companyName.length === 0 || status.length === 0) {
+        if(companyName.length === 0 || status.length === 0 || roleTitle.length === 0) {
             setError(true)
         } else {
             fetch(conf.url + `/apps/${auth.user.username}`, {
@@ -109,7 +109,7 @@ const CreateApplication = () => {
                         </div>
                     </div>
                     <button className='rounded-lg p-2 bg-slate-300 text-xl' onClick={handleCreate}>Create</button>
-                    {error? <p className='text-red-600 text-md'>companyName name & Status are required fields</p> : null}
+                    {error? <p className='text-red-600 text-md'>Company Name, Role & Status are required fields</p> : null}
                     <Link to="/login" className='text-xl underline text-blue-500'>Back to home</Link>
                 </div>
             }

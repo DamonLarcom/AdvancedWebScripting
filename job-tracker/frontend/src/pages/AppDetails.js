@@ -53,7 +53,7 @@ const AppDetails = () => {
         e.preventDefault()
         setError(false)
 
-        if(company.length === 0 || status.length === 0) {
+        if(company.length === 0 || status.length === 0 || roleTitle.length === 0) {
             setError(true)
         } else{
             fetch(conf.url + `/apps/${id}`, {
@@ -101,10 +101,14 @@ const AppDetails = () => {
             :
             <div className='flex gap-5 w-full m-10'>
                 <div className='bg-slate-600 rounded-xl shadow-xl w-full h-full text-center p-5 flex flex-col'>
-                    <div className='flex justify-center m-5'>
+                    <div className='flex justify-center m-5 gap-3'>
                         <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-yellow-500 text-black' onClick={() => {setEditable(!isEditable)}}>
                             <AiOutlinePlus/> Toggle Edit Mode
                         </button>
+                        <Link to="/">
+                            <button className='flex justify-center rounded-full w-fit p-5 h-[25px] items-center text-black bg-blue-500'>Back to home</button>
+                        </Link>
+                        
                     </div>
                     <div className='flex text-white'>
                         <div className='w-full text-black flex flex-col gap-2'>
@@ -116,13 +120,17 @@ const AppDetails = () => {
                                     <p className='text-2xl text-red-600 font-bold'>Edits Disabled</p>
                                 }
                             </div>
-                            <label className='text-left text-md text-white'>Company</label>
+                            <label className='text-left text-md text-white'>Company<span className='text-red-400'>*</span></label>
                             <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
-                            <label className='text-left text-md text-white'>Role Title</label>
+                            <label className='text-left text-md text-white'>Role Title<span className='text-red-400'>*</span></label>
                             <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
                             <label className='text-left text-md text-white'>Link</label>
-                            <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
-                            <label className='text-left text-md text-white'>Status</label>
+                            {!isEditable?
+                                <a href={link} className='text-xl text-start underline text-blue-500 whitespace-nowrap text-ellipsis block overflow-hidden max-w-full'>{link}</a>
+                                :
+                                 <input disabled={!isEditable} type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
+                            }
+                            <label className='text-left text-md text-white'>Status<span className='text-red-400'>*</span></label>
                             <select disabled={!isEditable} value={status} onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
                                 <option value="">--Select Application Status--</option>
                                 <option value="Submitted">Submitted</option>
@@ -137,6 +145,8 @@ const AppDetails = () => {
                                 null
                             }
                         </div>
+
+                        {/* Skills side */}
                         <div className='w-full p-10 flex flex-col gap-2'>
                             <h2 className='text-2xl border-b-4 border-black'>Skills</h2>
                             {isEditable?
@@ -163,14 +173,15 @@ const AppDetails = () => {
                             }
                         </div>
                     </div>
-                    {error? <p className='text-red-600 text-md'>Company Name & Status are required fields</p> : null}
-                    <Link to="/login" className='text-xl underline text-blue-500 mt-10'>Back to home</Link>
+                    {error? <p className='text-red-600 text-md'>Fields with (*) are required</p> : null}
                 </div>
-                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 min-h-full text-center p-5 flex flex-col items-center'>
+
+                {/* Notes */}
+                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 min-h-fit text-center p-5 flex flex-col items-center'>
                     <div className='flex justify-items-center gap-2'>
                         <h2 className="text-2xl text-white">Notes</h2>
                         {isEditable?
-                            <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black' onClick={() => {setEditable(!isEditable)}}>
+                            <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black'>
                                 <AiOutlinePlus/> Add Note
                             </button>
                             :
@@ -178,7 +189,7 @@ const AppDetails = () => {
                         }
                         
                     </div>
-                    <div className='flex flex-col rounded-xl bg-slate-700 h-full w-full m-2 overflow-y-scroll gap-1'>
+                    <div className='flex flex-col rounded-xl h-fit max-h-full w-full m-2 overflow-y-scroll gap-1'>
                         {
                             notes? 
                                 notes.map((note) => (
