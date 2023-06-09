@@ -33,13 +33,6 @@ const ApplicationRow = ({app}) => {
         <td className={'border-[1px] border-white text-black ' + getColor(app.status)}>{app.status}</td>
         <td className={'border-[1px] border-white'}>{app.title}</td>
         <td className='border-[1px] border-white'>{moment(app.application_date).format('MMM Do YYYY, h:mm a')}</td>
-        <td className='border-[1px] border-white'>
-            {app.link.length > 0?
-                <a className='underline text-blue-500' href={app.link}>{app.link}</a>
-                :
-                <p>No link available</p>
-            }
-        </td>
     </Tr>
   )
 }

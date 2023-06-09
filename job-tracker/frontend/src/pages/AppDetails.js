@@ -6,6 +6,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import {TiDelete} from "react-icons/ti"
 import { useNavigate } from 'react-router-dom'
 import Accordion from '../components/Accordion'
+import NewNoteCard from '../components/NewNoteCard'
 
 const AppDetails = () => {
     const [application, setApplication] = useState({})
@@ -68,6 +69,10 @@ const AppDetails = () => {
         }
     }
 
+    const handleNewNote = () => {
+        
+    }
+
     const addSkill = (e,skill) => {
         e.preventDefault()
 
@@ -96,7 +101,7 @@ const AppDetails = () => {
     }
 
   return (
-    <div className='h-screen flex justify-center items-center'>
+    <div className='max-h-screen flex justify-center items-center'>
         {loading?
             <SyncLoader color="#FFF"/>
             :
@@ -185,19 +190,12 @@ const AppDetails = () => {
                 </div>
 
                 {/* Notes */}
-                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 min-h-fit text-center p-5 flex flex-col items-center'>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-1/2 max-h-full text-center p-5 flex flex-col items-center'>
                     <div className='flex justify-items-center gap-2'>
                         <h2 className="text-2xl text-white">Notes</h2>
-                        {isEditable?
-                            <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black'>
-                                <AiOutlinePlus/> Add Note
-                            </button>
-                            :
-                            null
-                        }
-                        
                     </div>
-                    <div className='flex flex-col rounded-xl h-fit max-h-full w-full m-2 overflow-y-scroll gap-1'>
+                    <div className='flex flex-col rounded-xl w-full m-2 overflow-y-scroll gap-1'>
+                        <NewNoteCard appId={id}/>
                         {
                             notes? 
                                 notes.map((note) => (
