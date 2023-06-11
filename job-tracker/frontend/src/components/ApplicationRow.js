@@ -28,10 +28,11 @@ const ApplicationRow = ({app}) => {
     }
 
   return (
-    <Tr className='text-center border-x-[1px] border-white h-10 text-lg' app={app}>
-        <td className='border-[1px] border-white '>{app.company}</td>
+    <Tr className='text-center border-x-[1px] border-white' app={app}>
+        <td className='border-[1px] border-white'>{app.company}</td>
         <td className={'border-[1px] border-white text-black ' + getColor(app.status)}>{app.status}</td>
         <td className={'border-[1px] border-white'}>{app.title}</td>
+        <td className='border-[1px] border-white'>{app.location}</td>
         <td className='border-[1px] border-white'>{moment(app.application_date).format('MMM Do YYYY, h:mm a')}</td>
     </Tr>
   )

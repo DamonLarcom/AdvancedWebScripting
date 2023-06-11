@@ -14,6 +14,7 @@ const AppDetails = () => {
     const [company, setCompany] = useState("")
     const [roleTitle, setRoleTitle] = useState("")
     const [status, setStatus] = useState("")
+    const [location, setLocation] = useState("")
     const [link, setLink] = useState("")
     const [skills, setSkills] = useState([])
     const [skill, setSkill] = useState('')
@@ -45,6 +46,7 @@ const AppDetails = () => {
         setCompany(application.company)
         setRoleTitle(application.title)
         setStatus(application.status)
+        setLocation(application.location)
         setLink(application.link)
         setSkills(application.skills)
         setNotes(application.notes)
@@ -64,7 +66,7 @@ const AppDetails = () => {
                 headers :{
                     "Authorization" : JSON.parse(localStorage.getItem("creds"))
                 },
-                body: JSON.stringify({company: company, title: roleTitle, status: status, link: link, skills: skills})
+                body: JSON.stringify({company: company, title: roleTitle, location: location, status: status, link: link, skills: skills})
             }).then(navigate(`/`))
         }
     }
@@ -105,8 +107,8 @@ const AppDetails = () => {
         {loading?
             <SyncLoader color="#FFF"/>
             :
-            <div className='flex gap-5 w-full m-10'>
-                <div className='bg-slate-600 rounded-xl shadow-xl w-full h-full text-center p-5 flex flex-col'>
+            <div className='flex gap-5 w-full max-h-screen p-10'>
+                <div className='bg-slate-600 rounded-xl shadow-xl w-full text-center p-5 flex flex-col'>
                     <div className='flex justify-center m-5 gap-3'>
                         <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-yellow-500 text-black' onClick={() => {setEditable(!isEditable)}}>
                             <AiOutlinePlus/> Toggle Edit Mode
@@ -130,6 +132,8 @@ const AppDetails = () => {
                             <input disabled type="text" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} className='h-10 rounded-lg p-2'/>
                             <label className='text-left text-md text-white'>Role Title<span className='text-red-400'>*</span></label>
                             <input disabled={!isEditable} type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
+                            <label className='text-left text-md text-white'>Location<span className='text-red-400'>*</span></label>
+                            <input disabled={!isEditable} type="text" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} className='h-10 rounded-lg p-2'/>
                             <label className='text-left text-md text-white'>Link</label>
                             {link && !isEditable?
                                 link.startsWith("https://") || link.startsWith("http://")?
@@ -194,8 +198,8 @@ const AppDetails = () => {
                     <div className='flex justify-items-center gap-2'>
                         <h2 className="text-2xl text-white">Notes</h2>
                     </div>
-                    <div className='flex flex-col rounded-xl w-full m-2 overflow-y-scroll gap-1'>
-                        <NewNoteCard appId={id}/>
+                    <NewNoteCard appId={id}/>
+                    <div className='flex flex-col rounded-xl w-full m-2 h-full max-h-full overflow-y-scroll gap-1'>
                         {
                             notes? 
                                 notes.map((note) => (

@@ -9,6 +9,7 @@ const CreateApplication = () => {
     const [companyName, setCompanyName] = useState("")
     const [roleTitle, setRoleTitle] = useState("")
     const [status, setStatus] = useState("")
+    const [location, setLocation] = useState("")
     const [link, setLink] = useState("")
     // skill list
     const [skills, setSkills] = useState([])
@@ -35,6 +36,7 @@ const CreateApplication = () => {
                     company: companyName,
                     title: roleTitle,
                     status: status,
+                    location: location,
                     link: link,
                     skills: skills
                 })
@@ -74,6 +76,7 @@ const CreateApplication = () => {
                             <form className='flex flex-col gap-3 w-full'>
                                 <input type="text" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className='h-10 rounded-lg p-2'/>
                                 <input type="text" placeholder="Role Title" value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} className='h-10 rounded-lg p-2'/>
+                                <input type="text" placeholder="Job location" value={location} onChange={(e) => setLocation(e.target.value)} className='h-10 rounded-lg p-2'/>
                                 <input type="text" placeholder="Link to job post" value={link} onChange={(e) => setLink(e.target.value)} className='h-10 rounded-lg p-2'/>
                                 <select onChange={(e) => setStatus(e.target.value)} className='h-10 rounded-lg p-2'>
                                     <option value="">--Select Application Status--</option>
@@ -88,7 +91,7 @@ const CreateApplication = () => {
                         <div className='flex gap-5'>
                             <form className='flex flex-col gap-3 w-full'>
                                 <div className='flex justify-center'>
-                                    <input type="text" placeholder="Skill" value={skill} onChange={(e) => setSkill(e.target.value)} className='h-10 rounded-lg p-2 w-full'/>
+                                    <input type="text" placeholder="Skills (ex: Java,Python,React)" value={skill} onChange={(e) => setSkill(e.target.value)} className='h-10 rounded-lg p-2 w-full'/>
                                     <button className='flex rounded-full w-auto h-10 p-3 mx-2 bg-green-500 text-black' onClick={(e) => addSkill(e,skill)}>
                                         <AiOutlinePlus/>
                                     </button>

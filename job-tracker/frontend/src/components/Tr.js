@@ -5,7 +5,7 @@ const Tr = ({children, app}) => {
   const navigate = useNavigate()
 
   return (
-    <tr className='hover:bg-slate-500 font-bold text-center border-x-[1px] border-white h-10 text-lg' onClick={() => navigate(`/app/${app.id}`)}>
+    <tr className='hover:bg-slate-500 font-bold text-center border-x-[1px] border-white h-8 text-sm' onClick={() => navigate(`/app/${app.id}`)}>
         {children}
     </tr>
   )

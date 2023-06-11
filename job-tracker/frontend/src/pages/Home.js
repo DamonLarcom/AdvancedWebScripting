@@ -58,7 +58,7 @@ const Home = () => {
                 <>
                   <div className='flex justify-end items-center m-2 text-xl gap-3'>
                     <AiOutlineSearch className='text-3xl'/>
-                    <input type="text" className='rounded-full text-center text-black h-[25px] p-5' onChange={e => setFilter(e.target.value)}/>
+                    <input type="text" placeholder="Filter applications" className='rounded-full text-center text-black h-[25px] p-5' onChange={e => setFilter(e.target.value)}/>
                     <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black' onClick={() => navigate("/app/create")}>
                       <AiOutlinePlus/> Add Application
                     </button>

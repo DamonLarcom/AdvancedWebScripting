@@ -13,7 +13,7 @@ const Accordion = ({item, isEdit}) => {
             {open? <AiOutlineMinus/> : <AiOutlinePlus/>}
         </div>
         <div className={open? "": "collapse"}>
-            <p className='text-md text-start'>{item.content}</p>
+            <p className='text-md text-start whitespace-pre-wrap'>{item.content}</p>
         </div>
     </div>
     )
