@@ -84,9 +84,10 @@ func UpdateBaseApplication(w http.ResponseWriter, r *http.Request) {
 		{"Company", app.Company},
 		{"Title", app.Title},
 		{"Status", app.Status},
+		{"Location", app.Location},
 		{"Link", app.Link},
 		{"Skills", app.Skills},
-		{"Notes", app.Notes}}}})
+	}}})
 	util.PrintErr(err)
 	if results.MatchedCount == 0 {
 		util.ResNotFound(w)

@@ -15,12 +15,11 @@ var (
 )
 
 const url = "mongodb+srv://dlarcom:CnFj8a8Zj9lYbKe0@tracker.zvuawzs.mongodb.net/?authMechanism=SCRAM-SHA-1"
-const debugURL = "mongodb://localhost:27017/"
 
 // Connect establishes a connection with mongo
 func Connect() {
 	var err error
-	mongoConnection, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(debugURL))
+	mongoConnection, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(url))
 	util.ErrMongoConnection(err)
 
 	db := mongoConnection.Database("tracker")
