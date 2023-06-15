@@ -17,7 +17,9 @@ const Home = () => {
   const navigate = useNavigate()
 
   const filterApps = () => {
-    let shown = apps.filter(app => app.company.toLowerCase().includes(filter) || app.status.toLowerCase().includes(filter))
+    let shown = apps.filter(app => app.company.toLowerCase().includes(filter) 
+      || app.status.toLowerCase().includes(filter)
+      || app.location.toLowerCase().includes(filter))
     setFilteredApps(shown)
   }
 
@@ -44,26 +46,26 @@ const Home = () => {
   },[filter])
 
   return (
-    <div className='h-screen flex flex-col text-white overflow-auto'>
+    <div className='h-full flex flex-col text-white border-4 border-blue-400'>
       <Nav/>
       {
         auth.user?
-            <div className='h-full w-3/4 mx-auto'>
+            <div className='w-3/4 mx-auto'>
               {loading?
                 <div className='flex mx-auto justify-center'>
                   <SyncLoader color="#FFF" />
-                </div>
+                </div> 
                 
               :
                 <>
-                  <div className='flex justify-end items-center m-2 text-xl gap-3'>
+                  <div className='flex justify-end m-2 text-xl gap-3'>
                     <AiOutlineSearch className='text-3xl'/>
-                    <input type="text" placeholder="Filter applications" className='rounded-full text-center text-black h-[25px] p-5' onChange={e => setFilter(e.target.value)}/>
+                    <input type="text" placeholder="Filter applications" className='rounded-full text-center text-black h-[25px] p-5' onChange={e => setFilter(e.target.value.toLowerCase())}/>
                     <button className='flex rounded-full w-fit p-5 h-[25px] justify-center items-center bg-green-500 text-black' onClick={() => navigate("/app/create")}>
                       <AiOutlinePlus/> Add Application
                     </button>
                   </div>
-                  <Table apps={filteredApps} perPage={25}/>
+                  <Table apps={filteredApps} perPage={15}/>
                 </>}
             </div>
         :

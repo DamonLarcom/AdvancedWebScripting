@@ -10,10 +10,10 @@ const Table = ({apps, perPage}) => {
     const noApplications = slice.length === 0
 
   return (
-    <>
-        <table className='w-full h-fit border-2 border-white table-fixed'>
+    <div className='max-h-full'>
+        <table className='w-full max-h-full border-2 border-white table-fixed'>
             <thead>
-                <tr className='bg-slate-600'>
+                <tr className='bg-slate-600 h-10 max-h-10'>
                     <th className='w-1/5'>Company</th>
                     <th className='w-[10%]'>Status</th>
                     <th className='w-1/5'>Title</th>
@@ -21,7 +21,7 @@ const Table = ({apps, perPage}) => {
                     <th className='w-1/5'>Date Applied</th>
                 </tr>
             </thead>
-            <tbody className='overflow-y-hidden'>
+            <tbody className='overflow-y-scroll max-h-full'>
                 {
                     !noApplications?
                     slice.map((app, index) => (
@@ -37,7 +37,7 @@ const Table = ({apps, perPage}) => {
             :
             <TableFooter len={apps.length} range={range} page={page} setPage={setPage} slice={slice}/>
         }
-    </>
+    </div>
   )
 }
 

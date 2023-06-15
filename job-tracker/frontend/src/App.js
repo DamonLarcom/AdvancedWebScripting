@@ -11,7 +11,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="App min-h-screen bg-slate-800">
+      <div className="App max-h-screen h-screen bg-slate-800">
         <Router>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
