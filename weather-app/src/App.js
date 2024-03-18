@@ -2,7 +2,7 @@ import { useRef, useState} from "react";
 import WeatherContainer from "./components/WeatherContainer";
 import {BsCloudRainFill} from 'react-icons/bs'
 
-function App() {
+function App({apiKey}) {
   const [city, setCity] = useState('')
   const cityRef = useRef(null)
 
@@ -26,7 +26,7 @@ function App() {
             onClick={() => handleChange()}>Go!</button>
         </div>
         {city && city !== ''? 
-          <WeatherContainer search={city}/>
+          <WeatherContainer search={city} apiKey={apiKey}/>
           :
           <p className="text-lg md:text-3xl text-white font-chivo">No City Name Entered..</p>
         }
