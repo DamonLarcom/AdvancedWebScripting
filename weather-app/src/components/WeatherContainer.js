@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import WeatherTile from "./WeatherTile"
 import config from '../resources/config.json'
-import mockdata from "../resources/mockdata.json"
 import { SyncLoader } from "react-spinners";
 
-const WeatherContainer = ({search}) => {
+const WeatherContainer = ({search, apiKey}) => {
     const [forecast, setForecast] = useState({})
     const [loading, setLoading] = useState(true)
     const [isError, setError] = useState(false)
@@ -21,7 +20,7 @@ const WeatherContainer = ({search}) => {
     
     const fetchData = async() => {
         if(search !== '' && search !== null){
-        await fetch(`${config.apiUrl}&city=${search}`)
+        await fetch(`${config.apiUrl}&key=${apiKey}&city=${search}`)
             .then(res => res.json())
             .then(data => {
                 setForecast(data)
